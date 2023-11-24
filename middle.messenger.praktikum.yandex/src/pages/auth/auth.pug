@@ -1,0 +1,15 @@
+extends ../../mixins/layout/layout.pug
+
+block append head
+    style
+        include auth-styles.less
+
+block content
+    .authContainer
+        form.loginForm
+            h1.title Вход
+            input.loginInput(type="text" placeholder="Логин", name="login")
+            input.loginInput(type="password" placeholder="Пароль", name="password")
+            button.login(type="submit")
+                p.loginButton Авторизоваться
+            a.signInLink Нет аккаунта?
