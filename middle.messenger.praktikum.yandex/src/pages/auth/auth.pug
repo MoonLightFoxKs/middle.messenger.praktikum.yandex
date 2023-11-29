@@ -1,15 +1,31 @@
-extends ../../mixins/layout/layout.pug
+extends ../../templates/layout/layout.pug
 
 block append head
     style
         include auth-styles.less
 
 block content
-    .authContainer
-        form.loginForm
+    #login.authContainer
+        form.authForm.loginForm
             h1.title Вход
-            input.loginInput(type="text" placeholder="Логин", name="login")
-            input.loginInput(type="password" placeholder="Пароль", name="password")
-            button.login(type="submit")
-                p.loginButton Авторизоваться
-            a.signInLink Нет аккаунта?
+            input(type="text"  placeholder="Логин", name="login")
+            input(type="password" placeholder="Пароль", name="password")
+            button(type="submit")
+                p Авторизоваться
+            a(onClick='handleClick("signin")') Нет аккаунта?
+    #signin.authContainer
+        form.authForm.signinForm
+            h1.title Регистрация
+            input(type="email" placeholder="Почта", name="email")
+            input(type="text" placeholder="Логин", name="login")
+            input(type="text" placeholder="Имя", name="firstName")
+            input(type="text" placeholder="Фамилия", name="lastName")
+            input(type="tel" placeholder="Логин", name="phoneNumber")
+            input(type="password" placeholder="Пароль", name="password")
+            input(type="password" placeholder="Пароль еще раз", name="password")
+            button(type="submit")
+                p Зарегистрироваться
+            a(onClick='handleClick("signin")') Войти
+
+block append scripts
+    script(src='../../pages/auth/script.ts')

@@ -1,0 +1,10 @@
+extends ../../templates/layout/layout.pug
+
+block append head
+    style
+        include 404-styles.less
+
+block content
+    .errorContainer
+        img(src="/img/404.svg", alt="404error")
+        p Мы уронили вообще все, Наташ, честно

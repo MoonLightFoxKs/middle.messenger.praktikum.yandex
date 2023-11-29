@@ -1,0 +1,10 @@
+extends ../../templates/layout/layout.pug
+
+block append head
+    style
+        include 500-styles.less
+
+block content
+    .errorContainer
+        img(src="/img/500.svg", alt="500error")
+        p Наташа мы все уронили
