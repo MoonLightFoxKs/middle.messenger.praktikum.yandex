@@ -1,10 +1,3 @@
-extends ../../templates/layout/layout.pug
-
-block append head
-    style
-        include 404-styles.less
-
 block content
-    .errorContainer
-        img(src="/img/404.svg", alt="404error")
-        p Мы уронили вообще все, Наташ, честно
+    include ../../mixins/error/error.pug
+    +errorPage(404,"А вы странички продаете? Нет, даже не показываем Красивое")

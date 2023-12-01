@@ -8,3 +8,6 @@ function handleClick(divId:string) {
         element!.style.display = 'none';
     }
 }
+
+document.getElementById("singinText")?.addEventListener("click",()=>handleClick("signin"))
+document.getElementById("loginText")?.addEventListener("click",()=>handleClick("signin"))
