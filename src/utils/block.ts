@@ -155,6 +155,7 @@ export class Block {
       contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
     });
     const html = template(contextAndStubs);
+    console.log(html);
     const temp = document.createElement("template");
     temp.innerHTML = html;
     Object.entries(this.children).forEach(([_, component]) => {
@@ -180,6 +181,7 @@ export class Block {
       }
 
       component.getContent()?.append(...Array.from(stub.childNodes));
+      console.log(component.getContent());
 
       stub.replaceWith(component.getContent()!);
     });
@@ -219,7 +221,6 @@ export class Block {
   }
 
   _createDocumentElement(container: { tagName: string; className?: string }) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     const elem = document.createElement(container.tagName);
     container.className && elem.classList.add(container.className);
     return elem;
