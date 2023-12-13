@@ -16,29 +16,28 @@
   left: 0;
   margin: auto;
   font-weight: 500;
-  display: flex;
+
+  .loginForm {
+    display: flex;
+    flex-flow: column;
+  }
+
+  .signinForm {
+    display: flex;
+    flex-flow: column;
+  }
 }
 
-.authForm {
+form {
   display: flex;
   flex-direction: column;
-  align-items: center;
   flex: 1;
   margin: 0;
   visibility: visible;
 
-  .loginForm& {
-    height: 450px;
+  h1 {
+    align-self: center;
   }
-
-  .signinForm& {
-    height: 615px;
-  }
-}
-
-.title {
-  all: unset;
-  font-size: 20px;
 }
 
 input {
@@ -49,6 +48,7 @@ input {
   background-color: black;
   color: white;
   margin-top: 32px;
+  font-size: 14px;
 }
 
 input::placeholder {
@@ -64,7 +64,7 @@ button {
   border-radius: 8px;
   background-color: #5236c4;
   color: white;
-  margin-top: auto;
+  margin-top: 48px;
   margin-bottom: 16px;
   cursor: pointer;
 }

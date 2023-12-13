@@ -95,7 +95,6 @@ export class Block {
     this.componentDidMount();
   }
 
-  // Может переопределять пользователь, необязательно трогать
   componentDidMount() {}
 
   public dispatchComponentDidMount() {
@@ -116,7 +115,6 @@ export class Block {
     }
   }
 
-  // Может переопределять пользователь, необязательно трогать
   protected componentDidUpdate() {
     return true;
   }
@@ -155,7 +153,6 @@ export class Block {
       contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
     });
     const html = template(contextAndStubs);
-    console.log(html);
     const temp = document.createElement("template");
     temp.innerHTML = html;
     Object.entries(this.children).forEach(([_, component]) => {
@@ -181,7 +178,6 @@ export class Block {
       }
 
       component.getContent()?.append(...Array.from(stub.childNodes));
-      console.log(component.getContent());
 
       stub.replaceWith(component.getContent()!);
     });
@@ -189,7 +185,6 @@ export class Block {
     return temp.content;
   }
 
-  // Может переопределять пользователь, необязательно трогать
   render(): DocumentFragment {
     return new DocumentFragment();
   }
@@ -199,8 +194,6 @@ export class Block {
   }
 
   _makePropsProxy(props: any) {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
     const self = this;
 
     return new Proxy(props, {
