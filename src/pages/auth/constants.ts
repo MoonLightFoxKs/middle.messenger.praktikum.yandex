@@ -38,3 +38,16 @@ export const signinInputs = [
     name: "password",
   }),
 ];
+
+export const loginInputs = [
+  new Input({
+    type: InputType.text,
+    placeholder: "Логин",
+    name: "login",
+  }),
+  new Input({
+    type: InputType.password,
+    placeholder: "Пароль",
+    name: "password",
+  }),
+];

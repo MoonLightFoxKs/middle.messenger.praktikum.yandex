@@ -1,7 +1,7 @@
 function handleOnClick(
   showDiv: string,
   hideFirstDiv: string,
-  hideSecondDiv: string,
+  hideSecondDiv: string
 ) {
   const showElement = document.getElementById(showDiv);
   const hideFirstElement = document.getElementById(hideFirstDiv);
@@ -17,10 +17,10 @@ function handleOnClick(
 document
   .getElementById("changeInfo")
   ?.addEventListener("click", () =>
-    handleOnClick("editInfo", "profileInfo", "editPassword"),
+    handleOnClick("editInfo", "profileInfo", "editPassword")
   );
 document
   .getElementById("changePassword")
   ?.addEventListener("click", () =>
-    handleOnClick("editPassword", "profileInfo", "editInfo"),
+    handleOnClick("editPassword", "profileInfo", "editInfo")
   );

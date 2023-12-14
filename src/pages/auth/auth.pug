@@ -1,13 +1,9 @@
 block content
-  #login.authContainer
-    form.authForm.loginForm
-      h1.title Вход
-      //- input(type="text", placeholder="Логин", name="login")
-      input(type="password", placeholder="Пароль", name="password")
-      button(type="submit")
-        p Вход
-      a#singinText Нет аккаунта?
   .authContainer
+    .loginForm
+      !=formLogin
+      !=buttonSigninForm
+  #signin.authContainer
     .signinForm
       !=formSignin
       !=buttonLoginForm

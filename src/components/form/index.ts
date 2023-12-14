@@ -48,8 +48,6 @@ export class Form extends Block {
             data[`${input!.name}`] = input!.value;
           });
 
-        console.log(this.getContent());
-
         if (isSuccess) {
           console.log(data);
           if (this.props.buttonProps.callback) {
