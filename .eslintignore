@@ -1,0 +1,4 @@
+vite.config.ts
+vite-plugin-pug-precompile.ts
+server.js
+/dist

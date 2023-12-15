@@ -1,0 +1,21 @@
+.inputContainer {
+  width: 100%;
+  background-color: black;
+  color: white;
+
+  span.error {
+    display: none;
+  }
+
+  &.error {
+    input {
+      border-color: #ff2f2f;
+    }
+
+    span.error {
+      display: inline;
+      font-size: 10px;
+      color: #ff2f2f;
+    }
+  }
+}
