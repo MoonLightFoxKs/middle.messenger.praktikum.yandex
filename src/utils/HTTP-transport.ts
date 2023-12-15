@@ -14,59 +14,44 @@ type Options = {
   timeout?: number;
 };
 
+type HTTPMethod = (url: string, options?: Options) => Promise<unknown>;
 export class HTTPTransport {
-  public get = (url: string, options: Options) => {
-    let urlAddon = '';
-
-    if (options.data) {
-      urlAddon = queryStringify(options.data);
-    }
-
-    return this.request(`${url}${urlAddon}`, {
-      ...options,
-      method: Methods.GET,
-    });
+  get: HTTPMethod = (url, options = { method: Methods.GET }) => {
+    return this.request(url + queryStringify(options.data), options);
   };
 
-  public post = (url: string, options: Options) => {
-    return this.request(url, { ...options, method: Methods.POST });
+  put: HTTPMethod = (url, options = { method: Methods.PUT }) => {
+    return this.request(url, options);
   };
 
-  public put = (url: string, options: Options) => {
-    return this.request(url, { ...options, method: Methods.PUT });
+  post: HTTPMethod = (url, options = { method: Methods.POST }) => {
+    return this.request(url, options);
   };
 
-  public delete = (url: string, options: Options) => {
-    return this.request(url, { ...options, method: Methods.DELETE });
+  delete: HTTPMethod = (url, options = { method: Methods.DELETE }) => {
+    return this.request(url, options);
   };
 
-  private request = (url: string, options: Options) => {
-    const { headers = {}, method } = options;
+  request: HTTPMethod = (url, options) => {
+    const { method, data } = options!;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
+      xhr.open(method, url, true);
 
-      if (!method) {
-        reject('Нет метода');
-      }
-
-      xhr.open(method, url);
-
-      Object.keys(headers).forEach((key) => {
-        xhr.setRequestHeader(key, headers[key]);
-      });
-
-      if (options.timeout) {
-        xhr.timeout = options.timeout;
-      }
-
-      xhr.onload = () => resolve(xhr);
+      xhr.onload = function () {
+        resolve(xhr);
+      };
 
       xhr.onabort = reject;
       xhr.onerror = reject;
       xhr.ontimeout = reject;
 
-      xhr.send();
+      if (method === Methods.GET || !data) {
+        xhr.send();
+      } else {
+        xhr.send(data);
+      }
     });
   };
 }
