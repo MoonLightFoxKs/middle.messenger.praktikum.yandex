@@ -3,8 +3,7 @@
     "src",
     "vite-plugin-pug-precompile.ts",
     "vite.config.ts",
-    "server.js",
-    "index.ts"
+    "server.js"
   ],
   "exclude": ["./dist"],
   "compilerOptions": {
