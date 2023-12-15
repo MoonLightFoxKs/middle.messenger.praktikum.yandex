@@ -1,36 +1,44 @@
-type validateRulesType = Record<
-  string,
-  { pattern: RegExp; errorMessage: string }
+type ValidateRulesType = Record<
+string,
+{ pattern: RegExp; errorMessage: string }
 >;
 
-const validateRules: validateRulesType = {
+const validateRules: ValidateRulesType = {
   login: {
     pattern: /^(?=.*[a-zA-Z])([a-zA-Z0-9-_]){3,20}$/,
-    errorMessage: "Некорректный логин",
+    errorMessage: 'Некорректный логин',
   },
   email: {
     pattern: /.+@[^@]+[a-z]+\.[^@]{2,}$/,
-    errorMessage: "Некорректный email",
+    errorMessage: 'Некорректный email',
   },
   password: {
     pattern: /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,40}$/,
-    errorMessage: "Некорректный пароль",
+    errorMessage: 'Некорректный пароль',
+  },
+  oldPassword: {
+    pattern: /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,40}$/,
+    errorMessage: 'Некорректный пароль',
+  },
+  newPassword: {
+    pattern: /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,40}$/,
+    errorMessage: 'Некорректный пароль',
   },
   first_name: {
     pattern: /^[А-ЯЁA-Z][А-ЯЁA-Zа-яёa-z-]+$/,
-    errorMessage: "Некорректное имя",
+    errorMessage: 'Некорректное имя',
   },
   second_name: {
     pattern: /^[А-ЯЁA-Z][А-ЯЁA-Zа-яёa-z-]+$/,
-    errorMessage: "Некорректная фамилия",
+    errorMessage: 'Некорректная фамилия',
   },
   phone: {
     pattern: /^[+-d]?\d{10,15}$/,
-    errorMessage: "Некорректный номер телефона",
+    errorMessage: 'Некорректный номер телефона',
   },
   message: {
     pattern: /(.|\s)*\S(.|\s)*/,
-    errorMessage: "Сообщение не может быть пустым",
+    errorMessage: 'Сообщение не может быть пустым',
   },
 };
 
@@ -40,11 +48,11 @@ const validateData = (inputName: string, inputValue: string) => {
     message: string;
   } = {
     verify: true,
-    message: "",
+    message: '',
   };
   if (!validateRules.hasOwnProperty(inputName)) {
     result.verify = true;
-    result.message = "";
+    result.message = '';
     return result;
   }
   const pattern = validateRules[inputName].pattern;
@@ -57,16 +65,16 @@ const validateData = (inputName: string, inputValue: string) => {
 };
 
 export const validateInput = (el: Element) => {
-  const input = el.querySelector("input");
-  const span = el.querySelector("span");
+  const input = el.querySelector('input');
+  const span = el.querySelector('span');
   const resultValidation = validateData(input!.name, input!.value);
   if (input && span) {
     if (!resultValidation.verify) {
       span.innerHTML = resultValidation.message;
-      el.classList.add("error");
+      el.classList.add('error');
     } else {
-      span.innerHTML = "";
-      el.classList.remove("error");
+      span.innerHTML = '';
+      el.classList.remove('error');
     }
   }
   return resultValidation;

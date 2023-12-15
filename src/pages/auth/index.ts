@@ -1,35 +1,35 @@
-import { Button } from "../../components/button";
-import { Form } from "../../components/form";
-import { ButtonTag, ButtonType } from "../../constants";
-import { Block } from "../../utils/block";
-import { render } from "../../utils/render";
-import template from "./auth.pug";
-import { loginInputs, signinInputs } from "./constants";
+import { Button } from '../../components/button';
+import { Form } from '../../components/form';
+import { ButtonTag, ButtonType } from '../../constants';
+import { Block } from '../../utils/block';
+import { render } from '../../utils/render';
+import template from './auth.pug';
+import { loginInputs, signinInputs } from './constants';
 
 export class AuthPage extends Block {
   constructor() {
     super({
-      tagName: "div",
+      tagName: 'div',
     });
   }
 
   init(): void {
     this.children.formLogin = new Form({
-      name: "Вход",
+      name: 'Вход',
       inputs: loginInputs,
-      display: "none",
+      display: 'none',
       buttonProps: {
-        name: "Авторизоваться",
+        name: 'Авторизоваться',
         type: ButtonType.submit,
-        callback: () => render("chat"),
+        callback: () => render('chat'),
       },
     });
 
     this.children.buttonSigninForm = new Button({
       type: ButtonType.button,
       tag: ButtonTag.link,
-      name: "Нет аккаунта?",
-      display: "none",
+      name: 'Нет аккаунта?',
+      display: 'none',
       onClick: () => {
         if (!Array.isArray(this.children.formSignin)) {
           this.children.formSignin.show();
@@ -47,19 +47,19 @@ export class AuthPage extends Block {
     });
 
     this.children.formSignin = new Form({
-      name: "Регистрация",
+      name: 'Регистрация',
       inputs: signinInputs,
       buttonProps: {
-        name: "Зарегистрироваться",
+        name: 'Зарегистрироваться',
         type: ButtonType.submit,
-        callback: () => render("chat"),
+        callback: () => render('chat'),
       },
     });
 
     this.children.buttonLoginForm = new Button({
       type: ButtonType.button,
       tag: ButtonTag.link,
-      name: "Войти",
+      name: 'Войти',
       onClick: () => {
         if (!Array.isArray(this.children.formSignin)) {
           this.children.formSignin.hide();

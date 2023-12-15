@@ -1,8 +1,8 @@
-import { ButtonType, InputType } from "../../constants";
-import { Block } from "../../utils/block";
-import { Button } from "../button";
-import { Input } from "../input";
-import template from "./chat.pug";
+import { ButtonType, InputType } from '../../constants';
+import { Block } from '../../utils/block';
+import { Button } from '../button';
+import { Input } from '../input';
+import template from './chat.pug';
 
 type ChatProps = {
   name: string;
@@ -12,24 +12,24 @@ type ChatProps = {
 export class Chat extends Block {
   constructor(props: ChatProps) {
     super(
-      { tagName: "div", className: "chatContainer" },
+      { tagName: 'div', className: 'chatContainer' },
       {
-        messages: new Array(""),
+        messages: new Array(''),
         ...props,
-      }
+      },
     );
   }
 
   init() {
     this.children.messageInput = new Input({
       type: InputType.text,
-      name: "message",
-      placeholder: "Сообщение",
+      name: 'message',
+      placeholder: 'Сообщение',
     });
 
     this.children.send = new Button({
       type: ButtonType.submit,
-      name: "➜",
+      name: '➜',
       onClick: (event: MouseEvent | undefined) => {
         event?.preventDefault();
         if (
@@ -37,7 +37,7 @@ export class Chat extends Block {
           this.children.messageInput
         ) {
           const el = this.children.messageInput.getContent();
-          const value = el!.querySelector("input")!.value;
+          const value = el!.querySelector('input')!.value;
 
           let messages = this.props.messages;
           if (Array.isArray(messages)) {
@@ -52,10 +52,10 @@ export class Chat extends Block {
             });
 
           this.children.messageInput.setProps({
-            value: "",
+            value: '',
           });
 
-          el?.querySelector("input")?.focus();
+          el?.querySelector('input')?.focus();
 
           console.log({ message: value });
         }

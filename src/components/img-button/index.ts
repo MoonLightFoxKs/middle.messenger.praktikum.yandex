@@ -1,7 +1,7 @@
-import { Block } from "../../utils/block";
-import template from "./img-button.pug";
+import { Block } from '../../utils/block';
+import template from './img-button.pug';
 
-type ImgButtonPropsType = {
+type ImgButtonProps = {
   imgSrc: string;
   alt: string;
   className?: string;
@@ -12,17 +12,17 @@ type ImgButtonPropsType = {
 };
 
 export class ImgButton extends Block {
-  constructor(props: ImgButtonPropsType) {
+  constructor(props: ImgButtonProps) {
     super(
       {
-        tagName: "div",
+        tagName: 'div',
       },
       {
         ...props,
         events: {
           click: props.onClick,
         },
-      }
+      },
     );
   }
 

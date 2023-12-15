@@ -1,22 +1,22 @@
-import { Block } from "../../utils/block";
-import template from "./error.pug";
+import { Block } from '../../utils/block';
+import template from './error.pug';
 
-type ErrorPageType = {
+type ErrorPageProps = {
   imgName: string;
   text: string;
   className?: string;
 };
 
 export class ErrorPage extends Block {
-  constructor(props: ErrorPageType) {
+  constructor(props: ErrorPageProps) {
     super(
       {
-        tagName: "div",
-        className: "errorContainer",
+        tagName: 'div',
+        className: 'errorContainer',
       },
       {
         ...props,
-      }
+      },
     );
   }
 

@@ -1,22 +1,22 @@
-import { Block } from "../../utils/block";
-import template from "./info-block.pug";
+import { Block } from '../../utils/block';
+import template from './info-block.pug';
 
-type InfoBlockPropsType = {
+type InfoBlockProps = {
   label: string;
   text: string;
   className?: string;
 };
 
 export class InfoBlock extends Block {
-  constructor(props: InfoBlockPropsType) {
+  constructor(props: InfoBlockProps) {
     super(
       {
-        tagName: "div",
-        className: "infoBlock",
+        tagName: 'div',
+        className: 'infoBlock',
       },
       {
         ...props,
-      }
+      },
     );
   }
 

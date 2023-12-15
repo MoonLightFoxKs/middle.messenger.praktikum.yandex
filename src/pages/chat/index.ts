@@ -1,11 +1,11 @@
-import { Button } from "../../components/button";
-import { Chat } from "../../components/chat";
-import { Input } from "../../components/input";
-import { ButtonTag, ButtonType, InputType } from "../../constants";
-import { Block } from "../../utils/block";
-import { render } from "../../utils/render";
-import template from "./chat.pug";
-import { chatPreviewList } from "./constants";
+import { Button } from '../../components/button';
+import { Chat } from '../../components/chat';
+import { Input } from '../../components/input';
+import { ButtonTag, ButtonType, InputType } from '../../constants';
+import { Block } from '../../utils/block';
+import { render } from '../../utils/render';
+import template from './chat.pug';
+import { chatPreviewList } from './constants';
 
 type ChatPageProps = {
   isNoChat?: boolean;
@@ -15,13 +15,13 @@ export class ChatPage extends Block {
   constructor(props?: ChatPageProps) {
     super(
       {
-        tagName: "div",
-        className: "chatPage",
+        tagName: 'div',
+        className: 'chatPage',
       },
       {
         isNoChat: true,
         ...props,
-      }
+      },
     );
   }
 
@@ -29,15 +29,15 @@ export class ChatPage extends Block {
     this.children.profileButton = new Button({
       type: ButtonType.button,
       tag: ButtonTag.link,
-      name: "Профиль",
-      onClick: () => render("profile"),
+      name: 'Профиль',
+      onClick: () => render('profile'),
     });
 
     this.children.search = new Input({
       type: InputType.text,
-      placeholder: "поиск",
-      name: "search",
-      className: "searchInput",
+      placeholder: 'поиск',
+      name: 'search',
+      className: 'searchInput',
     });
 
     this.children.chatPreviewList = chatPreviewList.map((el) => {
@@ -45,14 +45,14 @@ export class ChatPage extends Block {
         events: {
           click: () => {
             this.children.chat = new Chat({
-              name: el.element?.querySelector(".name")?.innerHTML!,
+              name: el.element?.querySelector('.name')?.innerHTML!,
             });
             if (Array.isArray(this.children.chatPreviewList)) {
               this.children.chatPreviewList.forEach((elem) => {
-                elem.getContent()?.classList.remove("active");
+                elem.getContent()?.classList.remove('active');
               });
             }
-            el.getContent()?.classList.add("active");
+            el.getContent()?.classList.add('active');
             this.setProps({
               isNoChat: false,
             });

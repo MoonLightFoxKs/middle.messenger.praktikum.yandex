@@ -1,10 +1,10 @@
-import { queryStringify } from "./query-stringify";
+import { queryStringify } from './query-stringify';
 
 enum Methods {
-  GET = "GET",
-  POST = "POST",
-  PUT = "PUT",
-  DELETE = "DELETE",
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
 }
 
 type Options = {
@@ -16,7 +16,7 @@ type Options = {
 
 export class HTTPTransport {
   public get = (url: string, options: Options) => {
-    let urlAddon = "";
+    let urlAddon = '';
 
     if (options.data) {
       urlAddon = queryStringify(options.data);
@@ -47,7 +47,7 @@ export class HTTPTransport {
       const xhr = new XMLHttpRequest();
 
       if (!method) {
-        reject("Нет метода");
+        reject('Нет метода');
       }
 
       xhr.open(method, url);

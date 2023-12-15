@@ -1,8 +1,8 @@
-import { ButtonTag, ButtonType } from "../../constants";
-import { Block } from "../../utils/block";
-import template from "./button.pug";
+import { ButtonTag, ButtonType } from '../../constants';
+import { Block } from '../../utils/block';
+import template from './button.pug';
 
-export type ButtonPropsType = {
+type ButtonProps = {
   type: ButtonType;
   name: string;
   tag?: ButtonTag;
@@ -15,11 +15,11 @@ export type ButtonPropsType = {
 };
 
 export class Button extends Block {
-  constructor(props: ButtonPropsType) {
+  constructor(props: ButtonProps) {
     super(
       {
-        tagName: "div",
-        className: props.tag === ButtonTag.link ? "buttonContainer" : "",
+        tagName: 'div',
+        className: props.tag === ButtonTag.link ? 'buttonContainer' : '',
         display: props.display,
       },
       {
@@ -28,7 +28,7 @@ export class Button extends Block {
         events: {
           click: props.onClick,
         },
-      }
+      },
     );
   }
 

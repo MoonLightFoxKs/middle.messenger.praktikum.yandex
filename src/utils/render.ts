@@ -1,8 +1,9 @@
-import { Error404 } from "../pages/404";
-import { Error500 } from "../pages/500";
-import { AuthPage } from "../pages/auth";
-import { ChatPage } from "../pages/chat";
-import { ProfilePage } from "../pages/profile";
+import { Error404 } from '../pages/404';
+import { Error500 } from '../pages/500';
+import { AuthPage } from '../pages/auth';
+import { ChatPage } from '../pages/chat';
+import { HomePage } from '../pages/home';
+import { ProfilePage } from '../pages/profile';
 
 const ROUTES = {
   auth: AuthPage,
@@ -10,12 +11,13 @@ const ROUTES = {
   error404: Error404,
   profile: ProfilePage,
   chat: ChatPage,
+  home: HomePage,
 };
 
 export function render(name: keyof typeof ROUTES) {
-  const root = document.querySelector("#app")!;
+  const root = document.querySelector('#app')!;
 
-  root.innerHTML = "";
+  root.innerHTML = '';
 
   const Page = ROUTES[name];
 
