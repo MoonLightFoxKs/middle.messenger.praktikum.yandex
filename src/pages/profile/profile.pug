@@ -1,39 +1,28 @@
-block content
-  include ../../mixins/info-block/info-block.pug
-  include ../../mixins/action-button/action-button.pug
-  include info-list.pug
-  .sidebar
-    img(src="/img/arrow.svg", alt="back to chats")
-  .profileContainer
-    button.profileImg
-      img(src="/img/photo.svg", alt="photo")
-    h1 Ксения
-    #profileInfo
-      each info in infoList
-        +infoBlock(info.label, info.text)
-      .actionBlock
-        +actionButton('Изменить данные')#changeInfo.changeButton
-        +actionButton('Изменить пароль')#changePassword.changeButton
-        +actionButton('Выйти').logoutButton
-    #editInfo(style="display: none")
-      form
-        each info in infoList
-          input(
-            type=info.type,
-            placeholder=info.label,
-            value=info.text,
-            name=info.name
-          )
-        button.save(type="submit")
-          p Сохранить
-    #editPassword(style="display: none")
-      form
-        input(type="password", placeholder="Старый пароль", name="oldPassword")
-        input(type="password", placeholder="Новый пароль", name="newPassword")
-        input(
-          type="password",
-          placeholder="Новый пароль еще раз",
-          name="newPassword"
-        )
-        button.save(type="submit")
-          p Сохранить
+.sidebar
+  !=backButton
+.profileContainer
+  !=profileImgButton
+  h1 Ксения
+  //- #profileInfo
+  //-   each infoBlock in infoList
+  //-     !=infoBlock
+  //-   .actionBlock
+  //-     !=changeInfo
+  //-     !=changePassword
+  //-     !=logout
+
+  #editInfo
+    !=changeInfoForm
+
+  #editPassword
+    !=changePasswordForm
+    //-   form
+    //-     input(type="password", placeholder="Старый пароль", name="oldPassword")
+    //-     input(type="password", placeholder="Новый пароль", name="newPassword")
+    //-     input(
+    //-       type="password",
+    //-       placeholder="Новый пароль еще раз",
+    //-       name="newPassword"
+    //-     )
+    //-     button.save(type="submit")
+    //-       p Сохранить

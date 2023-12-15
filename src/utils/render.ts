@@ -1,7 +1,13 @@
+import { Error404 } from "../pages/404";
+import { Error500 } from "../pages/500";
 import { AuthPage } from "../pages/auth";
+import { ProfilePage } from "../pages/profile";
 
 const ROUTES = {
   auth: AuthPage,
+  error500: Error500,
+  error404: Error404,
+  profile: ProfilePage,
 };
 
 export function render(name: keyof typeof ROUTES) {
