@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 
-const resolve = require('path');
+import { resolve } from 'path';
 import vitePluginPugPrecompile from './vite-plugin-pug-precompile';
 
 export default defineConfig({
