@@ -1,10 +1,10 @@
-import { ButtonType } from '../../constants';
-import { Block } from '../../utils/block';
-import { validateInput } from '../../utils/validate-input';
-import { Button } from '../button';
-import { Input } from '../input';
+import { ButtonType } from "../../constants";
+import { Block } from "../../utils/block";
+import { validateInput } from "../../utils/validate-input";
+import { Button } from "../button";
+import { Input } from "../input";
 
-import template from './form.pug';
+import template from "./form.pug";
 
 type FormProps = {
   buttonProps: {
@@ -26,7 +26,7 @@ type DataForm = {
 export class Form extends Block {
   constructor(props: FormProps) {
     super(
-      { tagName: 'form', display: props.display },
+      { tagName: "form", display: props.display },
       {
         ...props,
       },
@@ -41,11 +41,11 @@ export class Form extends Block {
         const data: DataForm = {};
         let isSuccess = true;
         this.getContent()
-          ?.querySelectorAll('span.inputContainer')
+          ?.querySelectorAll("span.inputContainer")
           .forEach((el) => {
             isSuccess = validateInput(el).verify;
 
-            const input = el.querySelector('input');
+            const input = el.querySelector("input");
             data[`${input!.name}`] = input!.value;
           });
 
