@@ -3,6 +3,7 @@
 ## Разработка чата
 
 Учебный проект 1 модуля на Яндекс Практикуме. Используются: TypeScript, Less, Vite, Express, Pug.
+Добавлены ESLint и Stylelint
 
 ## Макет Figma
 
@@ -11,12 +12,6 @@
 ## Странички
 
 [Index](https://glittering-kringle-2796b0.netlify.app/)
-
-[Auth](https://glittering-kringle-2796b0.netlify.app/src/pages/auth/)
-[Profile](https://glittering-kringle-2796b0.netlify.app/src/pages/profile/)
-[Chat(заглушка)](https://glittering-kringle-2796b0.netlify.app/src/pages/chat/)
-[500](https://glittering-kringle-2796b0.netlify.app/src/pages/500/)
-[404](https://glittering-kringle-2796b0.netlify.app/src/pages/404/)
 
 ## Команды
 
@@ -33,7 +28,6 @@ npm run start
 nvm use
 npm install
 ```
-
 
 Запуск на деве
 
