@@ -1,7 +1,7 @@
-import { InputType } from "../../constants";
-import { Block } from "../../utils/block";
-import { validateInput } from "../../utils/validate-input";
-import template from "./input.pug";
+import { InputType } from '../../constants';
+import { Block } from '../../utils/block';
+import { validateInput } from '../../utils/validate-input';
+import template from './input.pug';
 
 type InputProps = {
   type: InputType;
@@ -16,13 +16,13 @@ type InputProps = {
 export class Input extends Block {
   constructor(props: InputProps) {
     super(
-      { tagName: "span", className: "inputContainer" },
+      { tagName: 'span', className: 'inputContainer' },
       {
         ...props,
         events: {
           focusout: () => {
             const el = this.getContent();
-            const input = el!.querySelector("input");
+            const input = el!.querySelector('input');
             const message = validateInput(el!).message;
             this.setProps({
               value: input!.value,

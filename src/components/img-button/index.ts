@@ -1,5 +1,5 @@
-import { Block } from "../../utils/block";
-import template from "./img-button.pug";
+import { Block } from '../../utils/block';
+import template from './img-button.pug';
 
 type ImgButtonProps = {
   imgSrc: string;
@@ -15,7 +15,7 @@ export class ImgButton extends Block {
   constructor(props: ImgButtonProps) {
     super(
       {
-        tagName: "div",
+        tagName: 'div',
       },
       {
         ...props,

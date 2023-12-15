@@ -1,12 +1,12 @@
-import { EventBus } from "./event-bus";
-import { nanoid } from "nanoid";
+import { EventBus } from './event-bus';
+import { nanoid } from 'nanoid';
 
 export class Block {
   static EVENTS = {
-    INIT: "init",
-    FLOW_CDM: "flow:component-did-mount",
-    FLOW_CDU: "flow:component-did-update",
-    FLOW_RENDER: "flow:render",
+    INIT: 'init',
+    FLOW_CDM: 'flow:component-did-mount',
+    FLOW_CDU: 'flow:component-did-update',
+    FLOW_RENDER: 'flow:render',
   };
 
   public id: string = nanoid(6);
@@ -153,7 +153,7 @@ export class Block {
     const fragment = this.render();
 
     this._removeEvents();
-    this._element!.innerHTML = "";
+    this._element!.innerHTML = '';
     this._element!.append(fragment);
 
     this._addEvents();
@@ -172,7 +172,7 @@ export class Block {
       contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
     });
     const html = template(contextAndStubs);
-    const temp = document.createElement("template");
+    const temp = document.createElement('template');
     temp.innerHTML = html;
     Object.entries(this.children).forEach(([_, component]) => {
       if (Array.isArray(component)) {
@@ -218,7 +218,7 @@ export class Block {
     return new Proxy(props, {
       get(target: any, prop: string) {
         const value = target[prop];
-        return typeof value === "function" ? value.bind(target) : value;
+        return typeof value === 'function' ? value.bind(target) : value;
       },
       set(target: any, prop: string, value: string) {
         const oldTarget = { ...target };
@@ -227,7 +227,7 @@ export class Block {
         return true;
       },
       deleteProperty() {
-        throw new Error("Нет доступа");
+        throw new Error('Нет доступа');
       },
     } as any);
   }
@@ -245,11 +245,11 @@ export class Block {
 
   show() {
     const content = this.getContent();
-    content!.style.display = "flex";
+    content!.style.display = 'flex';
   }
 
   hide() {
     const content = this.getContent();
-    content!.style.display = "none";
+    content!.style.display = 'none';
   }
 }

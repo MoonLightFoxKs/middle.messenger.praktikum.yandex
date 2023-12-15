@@ -1,5 +1,5 @@
-import { Block } from "../../utils/block";
-import template from "./chat-preview.pug";
+import { Block } from '../../utils/block';
+import template from './chat-preview.pug';
 
 type ChatPreviewProps = {
   name: string;
@@ -15,8 +15,8 @@ export class ChatPreview extends Block {
   constructor(props: ChatPreviewProps) {
     super(
       {
-        tagName: "div",
-        className: "chatPreviewContainer",
+        tagName: 'div',
+        className: 'chatPreviewContainer',
       },
       {
         ...props,

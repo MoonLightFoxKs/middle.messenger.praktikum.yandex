@@ -1,4 +1,4 @@
-import { InputType } from "../../constants";
+import { InputType } from '../../constants';
 
 type InfoListProps = {
   label: string;
@@ -9,57 +9,57 @@ type InfoListProps = {
 
 export const infoList: InfoListProps[] = [
   {
-    label: "Почта",
-    text: "pochta@yandex.ru",
+    label: 'Почта',
+    text: 'pochta@yandex.ru',
     type: InputType.email,
-    name: "email",
+    name: 'email',
   },
   {
-    label: "Логин",
-    text: "lalallla",
+    label: 'Логин',
+    text: 'lalallla',
     type: InputType.text,
-    name: "login",
+    name: 'login',
   },
   {
-    label: "Имя",
-    text: "Ксения",
+    label: 'Имя',
+    text: 'Ксения',
     type: InputType.text,
-    name: "first_name",
+    name: 'first_name',
   },
   {
-    label: "Фамилия",
-    text: "Котова",
+    label: 'Фамилия',
+    text: 'Котова',
     type: InputType.text,
-    name: "second_name",
+    name: 'second_name',
   },
   {
-    label: "Имя в чате",
-    text: "Ксения Котова",
+    label: 'Имя в чате',
+    text: 'Ксения Котова',
     type: InputType.text,
-    name: "display_name",
+    name: 'display_name',
   },
   {
-    label: "Телефон",
-    text: "89991234567",
+    label: 'Телефон',
+    text: '89991234567',
     type: InputType.tel,
-    name: "phone",
+    name: 'phone',
   },
 ];
 
 export const passwordList: InfoListProps[] = [
   {
-    label: "Старый пароль",
+    label: 'Старый пароль',
     type: InputType.password,
-    name: "oldPassword",
+    name: 'oldPassword',
   },
   {
-    label: "Новый пароль",
+    label: 'Новый пароль',
     type: InputType.password,
-    name: "newPassword",
+    name: 'newPassword',
   },
   {
-    label: "Новый пароль еще раз",
+    label: 'Новый пароль еще раз',
     type: InputType.password,
-    name: "newPassword",
+    name: 'newPassword',
   },
 ];

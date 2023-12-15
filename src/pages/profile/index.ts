@@ -1,32 +1,32 @@
-import { Button } from "../../components/button";
-import { Form } from "../../components/form";
-import { ImgButton } from "../../components/img-button";
-import { InfoBlock } from "../../components/info-block";
-import { Input } from "../../components/input";
-import { ButtonTag, ButtonType } from "../../constants";
-import { Block } from "../../utils/block";
-import { infoList, passwordList } from "./constants";
-import { render } from "../../utils/render";
-import template from "./profile.pug";
+import { Button } from '../../components/button';
+import { Form } from '../../components/form';
+import { ImgButton } from '../../components/img-button';
+import { InfoBlock } from '../../components/info-block';
+import { Input } from '../../components/input';
+import { ButtonTag, ButtonType } from '../../constants';
+import { Block } from '../../utils/block';
+import { infoList, passwordList } from './constants';
+import { render } from '../../utils/render';
+import template from './profile.pug';
 
 export class ProfilePage extends Block {
   constructor() {
     super({
-      tagName: "div",
+      tagName: 'div',
     });
   }
 
   init(): void {
     this.children.backButton = new ImgButton({
-      imgSrc: "/img/arrow.svg",
-      alt: "back to chats",
-      onClick: () => render("chat"),
+      imgSrc: '/img/arrow.svg',
+      alt: 'back to chats',
+      onClick: () => render('chat'),
     });
 
     this.children.profileImgButton = new ImgButton({
-      imgSrc: "/img/photo.svg",
-      alt: "profile photo",
-      className: "profileImg",
+      imgSrc: '/img/photo.svg',
+      alt: 'profile photo',
+      className: 'profileImg',
     });
 
     this.children.infoList = infoList.map(
@@ -39,9 +39,9 @@ export class ProfilePage extends Block {
 
     this.children.changeInfo = new Button({
       type: ButtonType.button,
-      name: "Изменить данные",
+      name: 'Изменить данные',
       tag: ButtonTag.button,
-      className: "changeButton",
+      className: 'changeButton',
       onClick: () => {
         if (Array.isArray(this.children.infoList)) {
           this.children.infoList.forEach((el) => el.hide());
@@ -63,9 +63,9 @@ export class ProfilePage extends Block {
 
     this.children.changePassword = new Button({
       type: ButtonType.button,
-      name: "Изменить пароль",
+      name: 'Изменить пароль',
       tag: ButtonTag.button,
-      className: "changeButton",
+      className: 'changeButton',
       onClick: () => {
         if (Array.isArray(this.children.infoList)) {
           this.children.infoList.forEach((el) => el.hide());
@@ -87,10 +87,10 @@ export class ProfilePage extends Block {
 
     this.children.logout = new Button({
       type: ButtonType.button,
-      name: "Выйти",
+      name: 'Выйти',
       tag: ButtonTag.button,
-      className: "logoutButton",
-      onClick: () => render("auth"),
+      className: 'logoutButton',
+      onClick: () => render('auth'),
     });
 
     this.children.changeInfoForm = new Form({
@@ -104,11 +104,11 @@ export class ProfilePage extends Block {
           }),
       ),
       buttonProps: {
-        name: "Сохранить",
+        name: 'Сохранить',
         type: ButtonType.submit,
-        callback: () => render("profile"),
+        callback: () => render('profile'),
       },
-      display: "none",
+      display: 'none',
     });
 
     this.children.changePasswordForm = new Form({
@@ -121,11 +121,11 @@ export class ProfilePage extends Block {
           }),
       ),
       buttonProps: {
-        name: "Сохранить",
+        name: 'Сохранить',
         type: ButtonType.submit,
-        callback: () => render("profile"),
+        callback: () => render('profile'),
       },
-      display: "none",
+      display: 'none',
     });
   }
 

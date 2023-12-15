@@ -1,10 +1,10 @@
-import { queryStringify } from "./query-stringify";
+import { queryStringify } from './query-stringify';
 
 enum Methods {
-  GET = "GET",
-  POST = "POST",
-  PUT = "PUT",
-  DELETE = "DELETE",
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
 }
 
 type Options = {

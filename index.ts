@@ -1,5 +1,5 @@
-import { render } from "./src/utils/render";
+import { render } from './src/utils/render';
 
-window.addEventListener("DOMContentLoaded", () => {
-  render("home");
+window.addEventListener('DOMContentLoaded', () => {
+  render('home');
 });
