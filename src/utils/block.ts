@@ -17,7 +17,7 @@ export class Block {
   private _element: HTMLElement | null = null;
   private _meta: {
     props: any;
-    container: { tagName: string; className?: string };
+    container: { tagName: string; className?: string; display?: string };
   };
 
   /** JSDoc
@@ -27,7 +27,7 @@ export class Block {
    * @returns {void}
    */
   constructor(
-    container: { tagName: string; className?: string },
+    container: { tagName: string; className?: string; display?: string },
     propsWithChildren: any = {}
   ) {
     const eventBus = new EventBus();
@@ -71,6 +71,18 @@ export class Block {
 
     Object.keys(events).forEach((eventName) => {
       this._element?.addEventListener(eventName, events[eventName]);
+    });
+  }
+
+  _removeEvents() {
+    const { events = {} }: any = this.props;
+
+    if (!events || !this._element) {
+      return;
+    }
+
+    Object.keys(events).forEach((eventName) => {
+      this._element!.removeEventListener(eventName, events[eventName]);
     });
   }
 
@@ -134,6 +146,7 @@ export class Block {
   private _render() {
     const fragment = this.render();
 
+    this._removeEvents();
     this._element!.innerHTML = "";
     this._element!.append(fragment);
 
@@ -213,15 +226,20 @@ export class Block {
     } as any);
   }
 
-  _createDocumentElement(container: { tagName: string; className?: string }) {
+  _createDocumentElement(container: {
+    tagName: string;
+    className?: string;
+    display?: string;
+  }) {
     const elem = document.createElement(container.tagName);
     container.className && elem.classList.add(container.className);
+    elem.style.display = container.display!;
     return elem;
   }
 
   show() {
     const content = this.getContent();
-    content!.style.display = "block";
+    content!.style.display = "flex";
   }
 
   hide() {

@@ -20,9 +20,7 @@ export class ProfilePage extends Block {
     this.children.backButton = new ImgButton({
       imgSrc: "/img/arrow.svg",
       alt: "back to chats",
-      onClick: () => {
-        // callback: () => render('chats'),
-      },
+      onClick: () => render("chat"),
     });
 
     this.children.profileImgButton = new ImgButton({
@@ -44,7 +42,23 @@ export class ProfilePage extends Block {
       name: "Изменить данные",
       tag: ButtonTag.button,
       className: "changeButton",
-      onClick: () => {},
+      onClick: () => {
+        if (Array.isArray(this.children.infoList)) {
+          this.children.infoList.forEach((el) => el.hide());
+        }
+        if (!Array.isArray(this.children.changeInfoForm)) {
+          this.children.changeInfoForm.show();
+        }
+        if (!Array.isArray(this.children.changePassword)) {
+          this.children.changePassword.hide();
+        }
+        if (!Array.isArray(this.children.logout)) {
+          this.children.logout.hide();
+        }
+        if (!Array.isArray(this.children.changeInfo)) {
+          this.children.changeInfo.hide();
+        }
+      },
     });
 
     this.children.changePassword = new Button({
@@ -52,7 +66,23 @@ export class ProfilePage extends Block {
       name: "Изменить пароль",
       tag: ButtonTag.button,
       className: "changeButton",
-      onClick: () => {},
+      onClick: () => {
+        if (Array.isArray(this.children.infoList)) {
+          this.children.infoList.forEach((el) => el.hide());
+        }
+        if (!Array.isArray(this.children.changePasswordForm)) {
+          this.children.changePasswordForm.show();
+        }
+        if (!Array.isArray(this.children.changePassword)) {
+          this.children.changePassword.hide();
+        }
+        if (!Array.isArray(this.children.logout)) {
+          this.children.logout.hide();
+        }
+        if (!Array.isArray(this.children.changeInfo)) {
+          this.children.changeInfo.hide();
+        }
+      },
     });
 
     this.children.logout = new Button({
@@ -60,7 +90,7 @@ export class ProfilePage extends Block {
       name: "Выйти",
       tag: ButtonTag.button,
       className: "logoutButton",
-      onClick: () => {},
+      onClick: () => render("auth"),
     });
 
     this.children.changeInfoForm = new Form({
@@ -78,6 +108,7 @@ export class ProfilePage extends Block {
         type: ButtonType.submit,
         callback: () => render("profile"),
       },
+      display: "none",
     });
 
     this.children.changePasswordForm = new Form({
@@ -94,6 +125,7 @@ export class ProfilePage extends Block {
         type: ButtonType.submit,
         callback: () => render("profile"),
       },
+      display: "none",
     });
   }
 

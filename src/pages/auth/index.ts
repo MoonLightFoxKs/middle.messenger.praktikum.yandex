@@ -17,10 +17,11 @@ export class AuthPage extends Block {
     this.children.formLogin = new Form({
       name: "Вход",
       inputs: loginInputs,
+      display: "none",
       buttonProps: {
         name: "Авторизоваться",
         type: ButtonType.submit,
-        // callback: () => render('chats'),
+        callback: () => render("chat"),
       },
     });
 
@@ -28,10 +29,20 @@ export class AuthPage extends Block {
       type: ButtonType.button,
       tag: ButtonTag.link,
       name: "Нет аккаунта?",
+      display: "none",
       onClick: () => {
-        const component =
-          this.getContent()?.querySelector<HTMLElement>("div#signin");
-        component!.removeAttribute("style");
+        if (!Array.isArray(this.children.formSignin)) {
+          this.children.formSignin.show();
+        }
+        if (!Array.isArray(this.children.buttonLoginForm)) {
+          this.children.buttonLoginForm.show();
+        }
+        if (!Array.isArray(this.children.formLogin)) {
+          this.children.formLogin.hide();
+        }
+        if (!Array.isArray(this.children.buttonSigninForm)) {
+          this.children.buttonSigninForm.hide();
+        }
       },
     });
 
@@ -41,7 +52,7 @@ export class AuthPage extends Block {
       buttonProps: {
         name: "Зарегистрироваться",
         type: ButtonType.submit,
-        // callback: () => render('chats'),
+        callback: () => render("chat"),
       },
     });
 
@@ -50,9 +61,18 @@ export class AuthPage extends Block {
       tag: ButtonTag.link,
       name: "Войти",
       onClick: () => {
-        const component =
-          this.getContent()?.querySelector<HTMLElement>("div#signin");
-        component!.style.display = "none";
+        if (!Array.isArray(this.children.formSignin)) {
+          this.children.formSignin.hide();
+        }
+        if (!Array.isArray(this.children.buttonLoginForm)) {
+          this.children.buttonLoginForm.hide();
+        }
+        if (!Array.isArray(this.children.formLogin)) {
+          this.children.formLogin.show();
+        }
+        if (!Array.isArray(this.children.buttonSigninForm)) {
+          this.children.buttonSigninForm.show();
+        }
       },
     });
   }

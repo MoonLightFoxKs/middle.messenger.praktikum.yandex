@@ -30,7 +30,7 @@ const validateRules: validateRulesType = {
   },
   message: {
     pattern: /(.|\s)*\S(.|\s)*/,
-    errorMessage: "Некорректно",
+    errorMessage: "Сообщение не может быть пустым",
   },
 };
 

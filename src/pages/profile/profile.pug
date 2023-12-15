@@ -3,26 +3,11 @@
 .profileContainer
   !=profileImgButton
   h1 Ксения
-  //- #profileInfo
-  //-   each infoBlock in infoList
-  //-     !=infoBlock
-  //-   .actionBlock
-  //-     !=changeInfo
-  //-     !=changePassword
-  //-     !=logout
-
-  #editInfo
-    !=changeInfoForm
-
-  #editPassword
-    !=changePasswordForm
-    //-   form
-    //-     input(type="password", placeholder="Старый пароль", name="oldPassword")
-    //-     input(type="password", placeholder="Новый пароль", name="newPassword")
-    //-     input(
-    //-       type="password",
-    //-       placeholder="Новый пароль еще раз",
-    //-       name="newPassword"
-    //-     )
-    //-     button.save(type="submit")
-    //-       p Сохранить
+  each infoBlock in infoList
+    !=infoBlock
+  .actionBlock
+    !=changeInfo
+    !=changePassword
+    !=logout
+  !=changeInfoForm
+  !=changePasswordForm

@@ -1,29 +1,24 @@
-import { ButtonTag, ButtonType } from "../../constants";
 import { Block } from "../../utils/block";
-import template from "./button.pug";
+import template from "./chat-preview.pug";
 
-export type ButtonPropsType = {
-  type: ButtonType;
+export type ChatPreviewProps = {
   name: string;
-  tag?: ButtonTag;
+  message: string;
   className?: string;
-  display?: string;
   onClick?: (event?: MouseEvent) => void;
   events?: {
     click: (event?: MouseEvent) => void;
   };
 };
 
-export class Button extends Block {
-  constructor(props: ButtonPropsType) {
+export class ChatPreview extends Block {
+  constructor(props: ChatPreviewProps) {
     super(
       {
         tagName: "div",
-        className: props.tag === ButtonTag.link ? "buttonContainer" : "",
-        display: props.display,
+        className: "chatPreviewContainer",
       },
       {
-        tag: ButtonTag.button,
         ...props,
         events: {
           click: props.onClick,

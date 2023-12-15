@@ -16,6 +16,7 @@ type FormPropsType = {
   name?: string;
   inputs?: Input[];
   className?: string;
+  display?: string;
 };
 
 type DataForm = {
@@ -25,7 +26,7 @@ type DataForm = {
 export class Form extends Block {
   constructor(props: FormPropsType) {
     super(
-      { tagName: "form" },
+      { tagName: "form", display: props.display },
       {
         ...props,
       }
