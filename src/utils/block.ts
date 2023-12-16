@@ -35,7 +35,7 @@ export class Block<Props extends Record<string, any> = any> {
    */
   constructor(
     container: { tagName: string; className?: string; display?: string },
-    propsWithChildren: any = {}
+    propsWithChildren: any = {},
   ) {
     const eventBus = new EventBus();
 
@@ -165,7 +165,7 @@ export class Block<Props extends Record<string, any> = any> {
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
         contextAndStubs[name] = component.map(
-          (c) => `<div data-id="${c.id}"></div>`
+          (c) => `<div data-id="${c.id}"></div>`,
         );
         return;
       }
