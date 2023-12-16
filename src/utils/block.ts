@@ -1,7 +1,8 @@
 import { EventBus } from './event-bus';
 import { nanoid } from 'nanoid';
 
-export class Block {
+//ругается на unknown
+export class Block<Props extends Record<string, any> = any> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -11,7 +12,7 @@ export class Block {
 
   public id: string = nanoid(6);
 
-  protected props: any;
+  protected props: Props;
 
   protected refs: Record<string, Block> = {};
 
@@ -34,7 +35,7 @@ export class Block {
    */
   constructor(
     container: { tagName: string; className?: string; display?: string },
-    propsWithChildren: any = {},
+    propsWithChildren: any = {}
   ) {
     const eventBus = new EventBus();
 
@@ -72,7 +73,7 @@ export class Block {
 
   _addEvents() {
     const { events = {} } = this.props as {
-      events: Record<string, () => void>;
+      events?: Record<string, () => void>;
     };
 
     Object.keys(events).forEach((eventName) => {
@@ -137,7 +138,7 @@ export class Block {
     return true;
   }
 
-  setProps = (nextProps: any) => {
+  setProps = (nextProps: Props) => {
     if (!nextProps) {
       return;
     }
@@ -164,7 +165,7 @@ export class Block {
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
         contextAndStubs[name] = component.map(
-          (c) => `<div data-id="${c.id}"></div>`,
+          (c) => `<div data-id="${c.id}"></div>`
         );
         return;
       }
