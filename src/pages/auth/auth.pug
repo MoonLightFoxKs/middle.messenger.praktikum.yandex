@@ -1,22 +1,11 @@
-block content
-  #login.authContainer
-    form.authForm.loginForm
-      h1.title Вход
-      input(type="text", placeholder="Логин", name="login")
-      input(type="password", placeholder="Пароль", name="password")
-      button(type="submit")
-        p Вход
-      a#singinText Нет аккаунта?
-  #signin.authContainer
-    form.authForm.signinForm
-      h1.title Регистрация
-      input(type="email", placeholder="Почта", name="email")
-      input(type="text", placeholder="Логин", name="login")
-      input(type="text", placeholder="Имя", name="first_name")
-      input(type="text", placeholder="Фамилия", name="second_name")
-      input(type="tel", placeholder="Логин", name="phone")
-      input(type="password", placeholder="Пароль", name="password")
-      input(type="password", placeholder="Пароль еще раз", name="password")
-      button(type="submit")
-        p Зарегистрироваться
-      a#loginText Войти
+style. 
+  :root{
+    background-color: #5236c4;
+  }
+.authContainer
+  .loginForm
+    !=formLogin
+    !=buttonSigninForm
+  .signinForm
+    !=formSignin
+    !=buttonLoginForm

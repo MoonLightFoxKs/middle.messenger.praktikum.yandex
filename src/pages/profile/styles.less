@@ -12,19 +12,15 @@
   margin: 60px auto auto;
   flex-grow: 1;
   color: white;
-}
 
-.actionBlock {
-  margin-top: 48px;
-}
-
-input {
-  all: unset;
-  display: flex;
-  width: 440px;
-  justify-content: space-between;
-  border-bottom: 1.5px solid #a894f9;
-  padding: 10px 0;
+  input {
+    all: unset;
+    display: flex;
+    width: 440px;
+    justify-content: space-between;
+    border-bottom: 1.5px solid #a894f9;
+    padding: 10px 0;
+  }
 }
 
 .save {
@@ -44,6 +40,28 @@ input {
   }
 }
 
+.actionBlock {
+  margin-top: 48px;
+  width: 440px;
+
+  button {
+    all: unset;
+    cursor: pointer;
+    border-bottom: 1.5px solid #a894f9;
+    width: 100%;
+  }
+
+  .changeButton p {
+    color: #3369f3;
+    margin: 10px 0;
+  }
+
+  .logoutButton p {
+    color: #f00;
+    margin: 10px 0;
+  }
+}
+
 .sidebar {
   background-color: #5236c4;
   width: 64px;
@@ -55,9 +73,17 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  img {
+    height: auto;
+  }
 }
 
 .profileImg {
   all: unset;
   cursor: pointer;
+
+  img {
+    height: 130px;
+  }
 }

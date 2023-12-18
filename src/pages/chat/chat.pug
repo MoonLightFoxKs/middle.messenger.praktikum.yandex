@@ -1,2 +1,16 @@
-block content
-  p Заглушка
+style. 
+  :root{
+    background-color: #5236c4;
+  }
+.chatList
+  .profileButton
+    !=profileButton
+  .search
+    !=search
+  each chatPreview in chatPreviewList
+    !=chatPreview
+.chatBody
+  if isNoChat
+    p Выберите чат чтобы отправить сообщение
+  else
+    !=chat

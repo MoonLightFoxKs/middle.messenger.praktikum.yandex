@@ -1,0 +1,10 @@
+.head
+    img(src="/img/photo.svg" alt='profile photo')
+    p #{name}
+.messages
+  each message in messages
+    if message
+      p #{message}
+form.sendMessage
+  !=messageInput
+  !=send
