@@ -1,7 +1,7 @@
 import { Input } from '../../components/input';
 import { InputType } from '../../constants';
 
-export const signinInputs = [
+export const signupInputs = [
   new Input({
     type: InputType.email,
     placeholder: 'Почта',

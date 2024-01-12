@@ -3,16 +3,17 @@ import { Chat } from '../../components/chat';
 import { Input } from '../../components/input';
 import { ButtonTag, ButtonType, InputType } from '../../constants';
 import { Block } from '../../utils/block';
-import { render } from '../../utils/render';
+import { Router } from '../../utils/router';
 import template from './chat.pug';
 import { chatPreviewList } from './constants';
 
-type ChatPageProps = {
-  isNoChat?: boolean;
-};
+// type ChatPageProps = {
+//   isNoChat?: boolean;
+// };
 
 export class ChatPage extends Block {
-  constructor(props?: ChatPageProps) {
+  // ругается на ChatPageProps, узнать почему
+  constructor(props?: any) {
     super(
       {
         tagName: 'div',
@@ -30,7 +31,10 @@ export class ChatPage extends Block {
       type: ButtonType.button,
       tag: ButtonTag.link,
       name: 'Профиль',
-      onClick: () => render('profile'),
+      onClick: () => {
+        const router = new Router();
+        router.go('/settings');
+      },
     });
 
     this.children.search = new Input({

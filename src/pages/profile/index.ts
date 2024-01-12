@@ -6,8 +6,8 @@ import { Input } from '../../components/input';
 import { ButtonTag, ButtonType } from '../../constants';
 import { Block } from '../../utils/block';
 import { infoList, passwordList } from './constants';
-import { render } from '../../utils/render';
 import template from './profile.pug';
+import { Router } from '../../utils/router';
 
 export class ProfilePage extends Block {
   constructor() {
@@ -20,7 +20,10 @@ export class ProfilePage extends Block {
     this.children.backButton = new ImgButton({
       imgSrc: '/img/arrow.svg',
       alt: 'back to chats',
-      onClick: () => render('chat'),
+      onClick: () => {
+        const router = new Router();
+        router.go('/messenger');
+      },
     });
 
     this.children.profileImgButton = new ImgButton({
@@ -90,7 +93,10 @@ export class ProfilePage extends Block {
       name: 'Выйти',
       tag: ButtonTag.button,
       className: 'logoutButton',
-      onClick: () => render('auth'),
+      onClick: () => {
+        const router = new Router();
+        router.go('/auth');
+      },
     });
 
     this.children.changeInfoForm = new Form({
@@ -106,7 +112,26 @@ export class ProfilePage extends Block {
       buttonProps: {
         name: 'Сохранить',
         type: ButtonType.submit,
-        callback: () => render('profile'),
+        callback: () => {
+          if (Array.isArray(this.children.infoList)) {
+            this.children.infoList.forEach((el) => el.show());
+          }
+          if (!Array.isArray(this.children.changeInfoForm)) {
+            this.children.changeInfoForm.hide();
+          }
+          if (!Array.isArray(this.children.changePasswordForm)) {
+            this.children.changePasswordForm.hide();
+          }
+          if (!Array.isArray(this.children.changePassword)) {
+            this.children.changePassword.show();
+          }
+          if (!Array.isArray(this.children.logout)) {
+            this.children.logout.show();
+          }
+          if (!Array.isArray(this.children.changeInfo)) {
+            this.children.changeInfo.show();
+          }
+        },
       },
       display: 'none',
     });
@@ -123,7 +148,26 @@ export class ProfilePage extends Block {
       buttonProps: {
         name: 'Сохранить',
         type: ButtonType.submit,
-        callback: () => render('profile'),
+        callback: () => {
+          if (Array.isArray(this.children.infoList)) {
+            this.children.infoList.forEach((el) => el.show());
+          }
+          if (!Array.isArray(this.children.changeInfoForm)) {
+            this.children.changeInfoForm.hide();
+          }
+          if (!Array.isArray(this.children.changePasswordForm)) {
+            this.children.changePasswordForm.hide();
+          }
+          if (!Array.isArray(this.children.changePassword)) {
+            this.children.changePassword.show();
+          }
+          if (!Array.isArray(this.children.logout)) {
+            this.children.logout.show();
+          }
+          if (!Array.isArray(this.children.changeInfo)) {
+            this.children.changeInfo.show();
+          }
+        },
       },
       display: 'none',
     });
