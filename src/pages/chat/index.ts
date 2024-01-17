@@ -4,6 +4,7 @@ import { Input } from '../../components/input';
 import { ButtonTag, ButtonType, InputType } from '../../constants';
 import { Block } from '../../utils/block';
 import { Router } from '../../utils/router';
+import { withStore } from '../../utils/store';
 import template from './chat.pug';
 import { chatPreviewList } from './constants';
 
@@ -11,7 +12,7 @@ import { chatPreviewList } from './constants';
 //   isNoChat?: boolean;
 // };
 
-export class ChatPage extends Block {
+class ChatPage extends Block {
   // ругается на ChatPageProps, узнать почему
   constructor(props?: any) {
     super(
@@ -22,7 +23,7 @@ export class ChatPage extends Block {
       {
         isNoChat: true,
         ...props,
-      },
+      }
     );
   }
 
@@ -71,3 +72,7 @@ export class ChatPage extends Block {
     return this.compile(template, this.props);
   }
 }
+
+const Page = withStore((state) => ({ chats: state.chats }));
+
+export default Page(ChatPage);

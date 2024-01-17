@@ -11,7 +11,7 @@ type FormProps = {
     type: ButtonType;
     name: string;
     className?: string;
-    callback?: () => void;
+    callback?: (data?: DataForm) => void;
   };
   name?: string;
   inputs?: Input[];
@@ -19,7 +19,7 @@ type FormProps = {
   display?: string;
 };
 
-type DataForm = {
+export type DataForm = {
   [index: string]: string;
 };
 
@@ -29,7 +29,7 @@ export class Form extends Block {
       { tagName: 'form', display: props.display },
       {
         ...props,
-      },
+      }
     );
   }
 
@@ -52,7 +52,7 @@ export class Form extends Block {
         if (isSuccess) {
           console.log(data);
           if (this.props.buttonProps.callback) {
-            this.props.buttonProps.callback();
+            this.props.buttonProps.callback(data);
           }
         }
       },

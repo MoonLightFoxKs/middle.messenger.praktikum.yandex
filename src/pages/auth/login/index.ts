@@ -5,6 +5,7 @@ import { Block } from '../../../utils/block';
 import { Router } from '../../../utils/router';
 import template from './login.pug';
 import { loginInputs } from '../constants';
+import AuthController from '../../../api/controllers/auth';
 
 export class LoginPage extends Block {
   constructor() {
@@ -20,9 +21,8 @@ export class LoginPage extends Block {
       buttonProps: {
         name: 'Авторизоваться',
         type: ButtonType.submit,
-        callback: () => {
-          const router = new Router();
-          router.go('/messenger');
+        callback: (data: any) => {
+          AuthController.signin(data);
         },
       },
     });

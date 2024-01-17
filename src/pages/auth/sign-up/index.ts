@@ -5,6 +5,7 @@ import { Block } from '../../../utils/block';
 import { Router } from '../../../utils/router';
 import template from './sign-up.pug';
 import { signupInputs } from '../constants';
+import AuthController from '../../../api/controllers/auth';
 
 export class SignUpPage extends Block {
   constructor() {
@@ -20,9 +21,8 @@ export class SignUpPage extends Block {
       buttonProps: {
         name: 'Зарегистрироваться',
         type: ButtonType.submit,
-        callback: () => {
-          const router = new Router();
-          router.go('/messenger');
+        callback: (data: any) => {
+          AuthController.signup(data);
         },
       },
     });

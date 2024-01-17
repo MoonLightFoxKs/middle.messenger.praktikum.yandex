@@ -8,6 +8,7 @@ import { Block } from '../../utils/block';
 import { infoList, passwordList } from './constants';
 import template from './profile.pug';
 import { Router } from '../../utils/router';
+import AuthController from '../../api/controllers/auth';
 
 export class ProfilePage extends Block {
   constructor() {
@@ -37,7 +38,7 @@ export class ProfilePage extends Block {
         new InfoBlock({
           label: el.label,
           text: el.text!,
-        }),
+        })
     );
 
     this.children.changeInfo = new Button({
@@ -94,8 +95,7 @@ export class ProfilePage extends Block {
       tag: ButtonTag.button,
       className: 'logoutButton',
       onClick: () => {
-        const router = new Router();
-        router.go('/auth');
+        AuthController.logout();
       },
     });
 
@@ -107,7 +107,7 @@ export class ProfilePage extends Block {
             placeholder: el.label,
             value: el.text,
             name: el.name,
-          }),
+          })
       ),
       buttonProps: {
         name: 'Сохранить',
@@ -143,7 +143,7 @@ export class ProfilePage extends Block {
             type: el.type,
             placeholder: el.label,
             name: el.name,
-          }),
+          })
       ),
       buttonProps: {
         name: 'Сохранить',
