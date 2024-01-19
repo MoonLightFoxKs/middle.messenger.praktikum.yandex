@@ -1,5 +1,6 @@
 import { Block } from './block';
 import { Route } from './route';
+import AuthController from '../api/controllers/auth';
 
 export class Router {
   private static __instance: Router;
@@ -56,7 +57,27 @@ export class Router {
 
     this._currentRoute = route!;
 
-    route!.render();
+    if (['/messenger', '/settings'].find((el) => el === pathname)) {
+      AuthController.getUser()
+        .then(() => {
+          if (pathname === '/messenger') {
+            // chatsController.getChats().then(() => route!.render());
+            route!.render();
+          } else {
+            route!.render();
+          }
+        })
+        .catch(() => {
+          route = this.getRoute('/');
+          window.location.pathname = '/';
+          this._currentRoute!.leave();
+          this._currentRoute = route!;
+
+          route!.render();
+        });
+    } else {
+      route!.render();
+    }
   }
 
   go(pathname: string) {

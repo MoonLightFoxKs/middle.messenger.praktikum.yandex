@@ -3,7 +3,7 @@ import { Error500 } from './src/pages/500';
 import { LoginPage } from './src/pages/auth/login';
 import { SignUpPage } from './src/pages/auth/sign-up';
 import ChatPage from './src/pages/chat';
-import { ProfilePage } from './src/pages/profile';
+import ProfilePage from './src/pages/profile';
 import { Router } from './src/utils/router';
 
 window.addEventListener('DOMContentLoaded', () => {

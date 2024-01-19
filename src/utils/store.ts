@@ -69,12 +69,16 @@ export const withStore =
           const newState = mapStateToProps(store.getState());
 
           if (!isEqual(state, newState) || 'messages' in newState) {
+            console.log('llallaalal');
             this.setProps({
               ...newState,
             });
 
-            // this.initChildren();
             this.init();
+            // костыль, подумать
+            this.setProps({
+              ...newState,
+            });
 
             state = newState;
           }

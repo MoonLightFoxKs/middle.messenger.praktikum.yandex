@@ -14,7 +14,6 @@ class AuthController {
 
     try {
       errorHandling(await this.api.signin(data));
-      await this.getUser();
 
       router.go('/messenger');
     } catch (e) {
@@ -36,7 +35,7 @@ class AuthController {
   }
 
   async getUser() {
-    const response = await this.api.user();
+    const response = await this.api.getUser();
 
     try {
       errorHandling(response);

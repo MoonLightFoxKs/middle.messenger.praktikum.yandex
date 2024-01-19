@@ -7,17 +7,29 @@ import { ButtonTag, ButtonType } from '../../constants';
 import { Block } from '../../utils/block';
 import { infoList, passwordList } from './constants';
 import template from './profile.pug';
-import { Router } from '../../utils/router';
 import AuthController from '../../api/controllers/auth';
+import UserController from '../../api/controllers/user';
+import { withStore } from '../../utils/store';
+import { CustomText } from '../../components/text';
+import { Modal } from '../../components/modal';
+import { InputFile } from '../../components/input-file';
+import { Router } from '../../utils/router';
 
-export class ProfilePage extends Block {
-  constructor() {
-    super({
-      tagName: 'div',
-    });
+class ProfilePage extends Block {
+  constructor(props: any) {
+    super(
+      {
+        tagName: 'div',
+      },
+      props
+    );
   }
 
   init(): void {
+    this.children.userName = new CustomText({
+      text: this.props.display_name,
+    });
+
     this.children.backButton = new ImgButton({
       imgSrc: '/img/arrow.svg',
       alt: 'back to chats',
@@ -28,16 +40,52 @@ export class ProfilePage extends Block {
     });
 
     this.children.profileImgButton = new ImgButton({
-      imgSrc: '/img/photo.svg',
+      imgSrc: this.props.avatar
+        ? 'https://ya-praktikum.tech/api/v2/resources' + this.props.avatar
+        : '/img/photo.svg',
       alt: 'profile photo',
       className: 'profileImg',
+      onClick: () => {
+        this.setProps({
+          updateUserImg: true,
+        });
+      },
+    });
+
+    this.children.updateUserImgModal = new Modal({
+      name: 'Загрузить картинку',
+      close: () => {
+        this.setProps({
+          updateUserImg: false,
+        });
+      },
+      content: [
+        new InputFile({
+          name: 'avatar',
+          onSubmit: (event?: Event) => {
+            event?.preventDefault();
+            if (!Array.isArray(this.children.updateUserImgModal)) {
+              const form = this.children.updateUserImgModal
+                .getContent()!
+                .querySelector('form') as HTMLFormElement;
+              const formData = new FormData(form);
+
+              UserController.updateAvatar(formData);
+
+              this.setProps({
+                updateUserImg: false,
+              });
+            }
+          },
+        }),
+      ],
     });
 
     this.children.infoList = infoList.map(
       (el) =>
         new InfoBlock({
           label: el.label,
-          text: el.text!,
+          text: this.props[el.name],
         })
     );
 
@@ -105,14 +153,15 @@ export class ProfilePage extends Block {
           new Input({
             type: el.type,
             placeholder: el.label,
-            value: el.text,
+            value: this.props[el.name],
             name: el.name,
           })
       ),
       buttonProps: {
         name: 'Сохранить',
         type: ButtonType.submit,
-        callback: () => {
+        callback: async (elem: any) => {
+          await UserController.updateProfile(elem);
           if (Array.isArray(this.children.infoList)) {
             this.children.infoList.forEach((el) => el.show());
           }
@@ -148,25 +197,27 @@ export class ProfilePage extends Block {
       buttonProps: {
         name: 'Сохранить',
         type: ButtonType.submit,
-        callback: () => {
-          if (Array.isArray(this.children.infoList)) {
-            this.children.infoList.forEach((el) => el.show());
-          }
-          if (!Array.isArray(this.children.changeInfoForm)) {
-            this.children.changeInfoForm.hide();
-          }
-          if (!Array.isArray(this.children.changePasswordForm)) {
-            this.children.changePasswordForm.hide();
-          }
-          if (!Array.isArray(this.children.changePassword)) {
-            this.children.changePassword.show();
-          }
-          if (!Array.isArray(this.children.logout)) {
-            this.children.logout.show();
-          }
-          if (!Array.isArray(this.children.changeInfo)) {
-            this.children.changeInfo.show();
-          }
+        callback: (elem: any) => {
+          UserController.updatePassword(elem).then(() => {
+            if (Array.isArray(this.children.infoList)) {
+              this.children.infoList.forEach((el) => el.show());
+            }
+            if (!Array.isArray(this.children.changeInfoForm)) {
+              this.children.changeInfoForm.hide();
+            }
+            if (!Array.isArray(this.children.changePasswordForm)) {
+              this.children.changePasswordForm.hide();
+            }
+            if (!Array.isArray(this.children.changePassword)) {
+              this.children.changePassword.show();
+            }
+            if (!Array.isArray(this.children.logout)) {
+              this.children.logout.show();
+            }
+            if (!Array.isArray(this.children.changeInfo)) {
+              this.children.changeInfo.show();
+            }
+          });
         },
       },
       display: 'none',
@@ -177,3 +228,7 @@ export class ProfilePage extends Block {
     return this.compile(template, this.props);
   }
 }
+
+const Page = withStore((state) => ({ ...state.currentUser }));
+
+export default Page(ProfilePage);

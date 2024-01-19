@@ -1,6 +1,12 @@
 import { EventBus } from './event-bus';
 import { nanoid } from 'nanoid';
 
+type Container = {
+  tagName: string;
+  className?: string;
+  display?: string;
+};
+
 //ругается на unknown
 export class Block<Props extends Record<string, any> = any> {
   static EVENTS = {
@@ -24,7 +30,7 @@ export class Block<Props extends Record<string, any> = any> {
 
   private _meta: {
     props: any;
-    container: { tagName: string; className?: string; display?: string };
+    container: Container;
   };
 
   /** JSDoc
@@ -33,10 +39,7 @@ export class Block<Props extends Record<string, any> = any> {
    *
    * @returns {void}
    */
-  constructor(
-    container: { tagName: string; className?: string; display?: string },
-    propsWithChildren: any = {},
-  ) {
+  constructor(container: Container, propsWithChildren: any = {}) {
     const eventBus = new EventBus();
 
     const { props, children } = this._getChildrenAndProps(propsWithChildren);
@@ -165,7 +168,7 @@ export class Block<Props extends Record<string, any> = any> {
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
         contextAndStubs[name] = component.map(
-          (c) => `<div data-id="${c.id}"></div>`,
+          (c) => `<div data-id="${c.id}"></div>`
         );
         return;
       }
@@ -233,11 +236,7 @@ export class Block<Props extends Record<string, any> = any> {
     } as any);
   }
 
-  _createDocumentElement(container: {
-    tagName: string;
-    className?: string;
-    display?: string;
-  }) {
+  _createDocumentElement(container: Container) {
     const elem = document.createElement(container.tagName);
     container.className && elem.classList.add(container.className);
     elem.style.display = container.display!;

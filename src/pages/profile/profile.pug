@@ -2,7 +2,7 @@
   !=backButton
 .profileContainer
   !=profileImgButton
-  h1 Ксения
+  !=userName
   each infoBlock in infoList
     !=infoBlock
   .actionBlock
@@ -11,3 +11,5 @@
     !=logout
   !=changeInfoForm
   !=changePasswordForm
+if updateUserImg 
+  !=updateUserImgModal
