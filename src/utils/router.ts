@@ -1,6 +1,7 @@
 import { Block } from './block';
 import { Route } from './route';
 import AuthController from '../api/controllers/auth';
+import ChatsController from '../api/controllers/chat';
 
 export class Router {
   private static __instance: Router;
@@ -61,13 +62,14 @@ export class Router {
       AuthController.getUser()
         .then(() => {
           if (pathname === '/messenger') {
-            // chatsController.getChats().then(() => route!.render());
-            route!.render();
+            ChatsController.getChats().then(() => route!.render());
+            // route!.render();
           } else {
             route!.render();
           }
         })
-        .catch(() => {
+        .catch((e) => {
+          alert(e);
           route = this.getRoute('/');
           window.location.pathname = '/';
           this._currentRoute!.leave();

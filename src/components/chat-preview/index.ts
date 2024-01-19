@@ -2,6 +2,7 @@ import { Block } from '../../utils/block';
 import template from './chat-preview.pug';
 
 type ChatPreviewProps = {
+  id: string | number;
   name: string;
   message: string;
   className?: string;
@@ -23,7 +24,7 @@ export class ChatPreview extends Block {
         events: {
           click: props.onClick,
         },
-      },
+      }
     );
   }
 
