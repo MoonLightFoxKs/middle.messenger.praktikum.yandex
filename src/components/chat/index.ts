@@ -1,26 +1,198 @@
-import { ButtonType, InputType } from '../../constants';
+import { ButtonTag, ButtonType, InputType } from '../../constants';
 import { Block } from '../../utils/block';
 import { Button } from '../button';
+import { ImgButton } from '../img-button';
 import { Input } from '../input';
+import { Modal } from '../modal';
 import template from './chat.pug';
+import ChatsController from '../../api/controllers/chat';
+import { User, store, withStore } from '../../utils/store';
+import { Form } from '../form';
+import UserController from '../../api/controllers/user';
+import { validateInput } from '../../utils/validate-input';
+import MessageController from '../../api/controllers/message';
 
-type ChatProps = {
-  name: string;
-  messages?: string[];
-};
-
+// type ChatProps = {
+//   name: string;
+//   id: number;
+//   messages?: string[];
+// };
 export class Chat extends Block {
-  constructor(props: ChatProps) {
+  constructor(props: any) {
     super(
       { tagName: 'div', className: 'chatContainer' },
       {
         messages: new Array(''),
         ...props,
-      },
+      }
     );
   }
 
+  private addMessage = () => {
+    if (
+      !Array.isArray(this.children.messageInput) &&
+      this.children.messageInput
+    ) {
+      const el = this.children.messageInput.getContent();
+      const value = el!.querySelector('input')!.value;
+
+      const resultValidation = validateInput(el!);
+
+      if (resultValidation.verify) {
+        console.log(this.props, 'пропсы чата');
+        MessageController.sendMessage(this.props.id, value);
+
+        this.children.messageInput.setProps({
+          value: '',
+        });
+      }
+    }
+  };
+
   init() {
+    // setTimeout(() => {
+    //   const messages = this.getContent()?.getElementsByClassName('messages');
+
+    //   if (messages![0]) {
+    //     messages![0].scrollTo(0, messages![0].scrollHeight);
+    //   }
+    // });
+
+    this.children.settingsButton = new ImgButton({
+      imgSrc: '/img/chat-settings.svg',
+      alt: 'chat settings',
+      className: 'settingsButton',
+      onClick: () => {
+        this.setProps({
+          openSettings: true,
+        });
+      },
+    });
+
+    this.children.settingsModal = new Modal({
+      name: '',
+      close: () => {
+        this.setProps({
+          openSettings: false,
+        });
+      },
+      content: [
+        new Button({
+          type: ButtonType.button,
+          name: 'Добавить пользователя в чатик',
+          className: 'settingsButtonInModal',
+          onClick: async () => {
+            this.setProps({
+              openSettings: false,
+              addUser: true,
+            });
+          },
+        }),
+        new Button({
+          type: ButtonType.button,
+          name: 'Удалить пользователя из чатика',
+          className: 'settingsButtonInModal',
+          onClick: async () => {
+            ChatsController.getUsers({ id: this.props.chat.id }).then(
+              (user: Omit<User, 'phone' | 'email'>[]) => {
+                this.children.delUser = new Modal({
+                  name: 'Удалить из чата',
+                  close: () => {
+                    this.setProps({
+                      isDelUser: false,
+                    });
+                  },
+                  content: user.map((el) => {
+                    const button = new Button({
+                      tag: ButtonTag.link,
+                      name: el.login,
+                      type: ButtonType.button,
+                      onClick: () => {
+                        ChatsController.delUser({
+                          users: [el.id],
+                          chatId: this.props.chat.id,
+                        });
+                        this.setProps({
+                          isDelUser: false,
+                        });
+                      },
+                    });
+
+                    return button;
+                  }),
+                });
+                this.setProps({
+                  openSettings: false,
+                  isDelUser: true,
+                });
+              }
+            );
+          },
+        }),
+      ],
+    });
+
+    this.children.addUserModal = new Modal({
+      name: 'Добавить в чатик',
+      close: () => {
+        this.setProps({
+          addUser: false,
+        });
+      },
+      content: [
+        new Form({
+          inputs: [
+            new Input({
+              type: InputType.text,
+              name: 'login',
+              placeholder: 'Поиск пользователя',
+            }),
+          ],
+          buttonProps: {
+            type: ButtonType.button,
+            name: 'Поиск',
+            className: 'submitButton',
+            callback: (data: any) => {
+              UserController.search({ ...data }).then(
+                (user: Omit<User, 'phone' | 'email'>[]) => {
+                  this.children.users = new Modal({
+                    name: 'Добавить пользователя в чат',
+                    close: () => {
+                      this.setProps({
+                        isUsers: false,
+                      });
+                    },
+                    content: user.map((el) => {
+                      const button = new Button({
+                        tag: ButtonTag.link,
+                        name: el.login,
+                        type: ButtonType.button,
+                        onClick: () => {
+                          ChatsController.addUser({
+                            users: [el.id],
+                            chatId: this.props.chat.id,
+                          });
+                          this.setProps({
+                            isUsers: false,
+                          });
+                        },
+                      });
+
+                      return button;
+                    }),
+                  });
+                  this.setProps({
+                    addUser: false,
+                    isUsers: true,
+                  });
+                }
+              );
+            },
+          },
+        }),
+      ],
+    });
+
     this.children.messageInput = new Input({
       type: InputType.text,
       name: 'message',
@@ -31,34 +203,49 @@ export class Chat extends Block {
       type: ButtonType.submit,
       name: '➜',
       onClick: (event: MouseEvent | undefined) => {
+        console.log(this.props, 'пропсы по клику');
         event?.preventDefault();
-        if (
-          !Array.isArray(this.children.messageInput) &&
-          this.children.messageInput
-        ) {
-          const el = this.children.messageInput.getContent();
-          const value = el!.querySelector('input')!.value;
+        this.addMessage();
 
-          let messages = this.props.messages;
-          if (Array.isArray(messages)) {
-            messages.push(value);
-          } else {
-            messages = [value];
-          }
+        // if (
+        //   !Array.isArray(this.children.messageInput) &&
+        //   this.children.messageInput
+        // ) {
+        //   const el = this.children.messageInput.getContent();
+        //   const value = el!.querySelector('input')!.value;
 
-          if (!Array.isArray(this.children.messages))
-            this.setProps({
-              messages: messages,
-            });
+        //   const resultValidation = validateInput(el!);
 
-          this.children.messageInput.setProps({
-            value: '',
-          });
+        //   if (resultValidation.verify) {
+        //     console.log(this.props, 'пропсы после валидации');
+        //     MessageController.sendMessage(this.props.chat.id, value);
+        //     console.log(this.props.chat.id, 'id чатика');
 
-          el?.querySelector('input')?.focus();
+        //     this.children.messageInput.setProps({
+        //       value: '',
+        //     });
+        //   }
 
-          console.log({ message: value });
-        }
+        // let messages = this.props.messages;
+        // if (Array.isArray(messages)) {
+        //   messages.push(value);
+        // } else {
+        //   messages = [value];
+        // }
+
+        // if (!Array.isArray(this.children.messages))
+        //   this.setProps({
+        //     messages: messages,
+        //   });
+
+        // this.children.messageInput.setProps({
+        //   value: '',
+        // });
+
+        // el?.querySelector('input')?.focus();
+
+        // console.log({ message: value });
+        // }
       },
     });
   }
@@ -67,3 +254,12 @@ export class Chat extends Block {
     return this.compile(template, this.props);
   }
 }
+
+const Page = withStore((store) => ({
+  messages: store.messages,
+  userId: store.currentUser?.id,
+}));
+
+console.log(store);
+
+export default Page(Chat);

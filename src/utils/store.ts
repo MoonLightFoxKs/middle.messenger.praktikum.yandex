@@ -1,5 +1,5 @@
-// import { UserData } from '../api/user';
-// import { Message } from '../controllers/messages-controller';
+import { Message } from '../api/controllers/message';
+import { UserData } from '../api/user';
 import { Block } from './block';
 import { EventBus } from './event-bus';
 import { set, isEqual } from './helpers';
@@ -25,7 +25,7 @@ export type ChatData = {
   avatar: string;
   unread_count: number;
   last_message: {
-    // user: UserData;
+    user: UserData;
     time: string;
     content: string;
   };
@@ -35,7 +35,7 @@ type StoreData = {
   currentUser?: User;
   chats?: ChatData[];
   users?: Omit<User, 'phone' | 'email'>;
-  //   messages?: Record<number, Message[]>;
+  messages?: Record<number, Message[]>;
 };
 
 class Store extends EventBus {
@@ -69,10 +69,10 @@ export const withStore =
           const newState = mapStateToProps(store.getState());
 
           if (!isEqual(state, newState) || 'messages' in newState) {
-            console.log('llallaalal');
             this.setProps({
               ...newState,
             });
+            console.log('перезапись стора');
 
             this.init();
             // костыль, подумать

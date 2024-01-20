@@ -6,9 +6,10 @@ import { Modal } from '../../components/modal';
 import { ButtonTag, ButtonType, InputType } from '../../constants';
 import { Block } from '../../utils/block';
 import { Router } from '../../utils/router';
-import { ChatData, withStore } from '../../utils/store';
+import { ChatData, store, withStore } from '../../utils/store';
 import template from './chat.pug';
 import ChatsController from '../../api/controllers/chat';
+import MessageController from '../../api/controllers/message';
 import { ChatPreview } from '../../components/chat-preview';
 import { Chat } from '../../components/chat';
 
@@ -87,6 +88,8 @@ class ChatPage extends Block {
       className: 'searchInput',
     });
 
+    this.children.chat = new Chat({});
+
     if (this.props.chats)
       this.children.chatPreviewList = this.props.chats.map((data: ChatData) => {
         const el = new ChatPreview({
@@ -97,9 +100,35 @@ class ChatPage extends Block {
         el.setProps({
           events: {
             click: async () => {
+              const token = await ChatsController.getToken(data.id);
+              await MessageController.connect(data.id, token);
+
               this.children.chat = new Chat({
-                name: el.element?.querySelector('.name')?.innerHTML!,
+                id: data.id,
+                name: data.title,
+                message: data.last_message?.content,
+                messages: store.getState().messages![data.id],
               });
+
+              // if (!Array.isArray(this.children.chat))
+              //   this.children.chat.setProps({
+              //     chat: data,
+              //     name: data.title,
+              //   });
+              // (this.children.chat as any).init();
+
+              // this.children.chat.setProps({
+              //   chat: data,
+              // });
+
+              //ПОМИДОРЫ ПОМОГИТЕ
+              // if (!Array.isArray(this.children.chat))
+              //   this.children.chat.setProps({
+              //     name: el.element?.querySelector('.name')?.innerHTML!,
+              //     id: data.id,
+              //     // messages: this.props.messages,
+              //   });
+
               if (Array.isArray(this.children.chatPreviewList)) {
                 this.children.chatPreviewList.forEach((elem) => {
                   elem.getContent()?.classList.remove('active');
@@ -121,6 +150,11 @@ class ChatPage extends Block {
   }
 }
 
-const Page = withStore((state) => ({ chats: state.chats }));
+const Page = withStore((store) => ({
+  chats: store.chats,
+  messages: store.messages,
+}));
+
+console.log(Page);
 
 export default Page(ChatPage);

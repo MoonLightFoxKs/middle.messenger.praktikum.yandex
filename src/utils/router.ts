@@ -63,7 +63,6 @@ export class Router {
         .then(() => {
           if (pathname === '/messenger') {
             ChatsController.getChats().then(() => route!.render());
-            // route!.render();
           } else {
             route!.render();
           }
