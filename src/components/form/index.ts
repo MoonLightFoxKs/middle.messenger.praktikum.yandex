@@ -29,7 +29,7 @@ export class Form extends Block {
       { tagName: 'form', display: props.display },
       {
         ...props,
-      }
+      },
     );
   }
 

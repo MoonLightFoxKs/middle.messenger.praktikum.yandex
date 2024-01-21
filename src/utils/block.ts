@@ -170,7 +170,7 @@ export class Block<Props extends Record<string, any> = any> {
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
         contextAndStubs[name] = component.map(
-          (c) => `<div data-id="${c.id}"></div>`
+          (c) => `<div data-id="${c.id}"></div>`,
         );
         return;
       }

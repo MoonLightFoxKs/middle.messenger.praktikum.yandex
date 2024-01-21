@@ -24,7 +24,7 @@ export class ChatPreview extends Block {
         events: {
           click: props.onClick,
         },
-      }
+      },
     );
   }
 

@@ -22,7 +22,7 @@ export class InputFile extends Block {
         events: {
           submit: props.onSubmit,
         },
-      }
+      },
     );
   }
 

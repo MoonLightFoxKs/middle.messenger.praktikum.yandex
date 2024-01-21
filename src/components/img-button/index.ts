@@ -22,7 +22,7 @@ export class ImgButton extends Block {
         events: {
           click: props.onClick,
         },
-      }
+      },
     );
   }
 

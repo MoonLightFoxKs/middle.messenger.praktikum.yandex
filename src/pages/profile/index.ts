@@ -21,7 +21,7 @@ class ProfilePage extends Block {
       {
         tagName: 'div',
       },
-      props
+      props,
     );
 
     store.on(StoreEvents.Updated, () => {
@@ -111,7 +111,7 @@ class ProfilePage extends Block {
         new InfoBlock({
           label: el.label,
           text: this.props[el.name],
-        })
+        }),
     );
 
     this.children.changeInfo = new Button({
@@ -180,7 +180,7 @@ class ProfilePage extends Block {
             placeholder: el.label,
             value: this.props[el.name],
             name: el.name,
-          })
+          }),
       ),
       buttonProps: {
         name: 'Сохранить',
@@ -217,7 +217,7 @@ class ProfilePage extends Block {
             type: el.type,
             placeholder: el.label,
             name: el.name,
-          })
+          }),
       ),
       buttonProps: {
         name: 'Сохранить',

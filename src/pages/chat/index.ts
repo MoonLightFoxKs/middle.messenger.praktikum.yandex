@@ -23,7 +23,7 @@ class ChatPage extends Block {
       {
         isNoChat: true,
         ...props,
-      }
+      },
     );
     store.on(StoreEvents.Updated, () => {
       if (!Array.isArray(this.children.chat) && this.props.data)
@@ -31,6 +31,7 @@ class ChatPage extends Block {
           id: this.props.data.id,
           name: this.props.data.title,
           messages: store.getState().messages![this.props.data.id],
+          userId: store.getState().currentUser?.id,
         });
     });
   }
@@ -71,7 +72,7 @@ class ChatPage extends Block {
               ChatsController.addChat(data).then(() =>
                 this.setProps({
                   addChat: false,
-                })
+                }),
               );
             },
           },
@@ -142,9 +143,9 @@ class ChatPage extends Block {
   }
 }
 
-const Page = withStore((store) => ({
-  chats: store.chats,
-  messages: store.messages,
+const Page = withStore((Store) => ({
+  chats: Store.chats,
+  messages: Store.messages,
 }));
 
 export default Page(ChatPage);

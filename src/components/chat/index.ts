@@ -6,7 +6,7 @@ import { Input } from '../input';
 import { Modal } from '../modal';
 import template from './chat.pug';
 import ChatsController from '../../api/controllers/chat';
-import store, { User, withStore } from '../../utils/store';
+import { User, withStore } from '../../utils/store';
 import { Form } from '../form';
 import UserController from '../../api/controllers/user';
 import { validateInput } from '../../utils/validate-input';
@@ -19,7 +19,7 @@ export class Chat extends Block {
       {
         messages: new Array(''),
         ...props,
-      }
+      },
     );
   }
 
@@ -113,7 +113,7 @@ export class Chat extends Block {
                   openSettings: false,
                   isDelUser: true,
                 });
-              }
+              },
             );
           },
         }),
@@ -173,7 +173,7 @@ export class Chat extends Block {
                     addUser: false,
                     isUsers: true,
                   });
-                }
+                },
               );
             },
           },
@@ -207,7 +207,5 @@ const Page = withStore((store) => ({
   messages: store.messages,
   userId: store.currentUser?.id,
 }));
-
-console.log(store);
 
 export default Page(Chat);

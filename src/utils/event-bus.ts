@@ -11,7 +11,7 @@ export class EventBus<
 
   on<Event extends MapInterface<E>>(
     event: Event,
-    callback: Handler<Args[Event]>
+    callback: Handler<Args[Event]>,
   ) {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
@@ -22,14 +22,14 @@ export class EventBus<
 
   off<Event extends MapInterface<E>>(
     event: Event,
-    callback: Handler<Args[Event]>
+    callback: Handler<Args[Event]>,
   ) {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }
 
     this.listeners[event] = this.listeners[event]!.filter(
-      (listener) => listener !== callback
+      (listener) => listener !== callback,
     );
   }
 

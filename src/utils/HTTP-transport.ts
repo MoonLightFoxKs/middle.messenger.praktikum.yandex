@@ -26,6 +26,7 @@ type HTTPRequest = (
 
 export class HTTPTransport {
   private API_URL = 'https://ya-praktikum.tech/api/v2';
+
   endpoint: string;
 
   constructor(endpoint: string) {
@@ -51,7 +52,7 @@ export class HTTPTransport {
         method: METHODS.PUT,
         data,
       },
-      isFile
+      isFile,
     );
   };
 

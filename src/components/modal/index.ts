@@ -18,7 +18,7 @@ export class Modal extends Block {
       },
       {
         ...props,
-      }
+      },
     );
   }
 

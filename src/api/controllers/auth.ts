@@ -5,6 +5,7 @@ import { AuthAPI, SigninData, SignupData } from '../auth';
 
 class AuthController {
   private readonly api: AuthAPI;
+
   constructor() {
     this.api = new AuthAPI();
   }

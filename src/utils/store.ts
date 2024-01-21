@@ -56,30 +56,30 @@ const store = new Store();
 
 export const withStore =
   (mapStateToProps: (state: StoreData) => Record<string, unknown>) =>
-  (Component: typeof Block) => {
-    let state: any;
+    (Component: typeof Block) => {
+      let state: any;
 
-    return class extends Component {
-      constructor(props: any) {
-        state = mapStateToProps(store.getState());
+      return class extends Component {
+        constructor(props: any) {
+          state = mapStateToProps(store.getState());
 
-        super({ ...props, ...state });
+          super({ ...props, ...state });
 
-        store.on(StoreEvents.Updated, () => {
-          const newState = mapStateToProps(store.getState());
+          store.on(StoreEvents.Updated, () => {
+            const newState = mapStateToProps(store.getState());
 
-          if (!isEqual(state, newState) || 'messages' in newState) {
-            this.setProps({
-              ...newState,
-            });
+            if (!isEqual(state, newState) || 'messages' in newState) {
+              this.setProps({
+                ...newState,
+              });
 
-            this.init();
+              this.init();
 
-            state = newState;
-          }
-        });
-      }
+              state = newState;
+            }
+          });
+        }
+      };
     };
-  };
 
 export default store;

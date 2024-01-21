@@ -4,6 +4,7 @@ import UserApi, { UserData, UserPassword } from '../user';
 
 class UserController {
   private readonly api: UserApi;
+
   constructor() {
     this.api = new UserApi();
   }

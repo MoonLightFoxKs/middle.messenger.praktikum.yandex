@@ -14,7 +14,7 @@ export class CustomText extends Block {
       },
       {
         ...props,
-      }
+      },
     );
   }
 
