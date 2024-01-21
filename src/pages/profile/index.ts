@@ -9,7 +9,7 @@ import { infoList, passwordList } from './constants';
 import template from './profile.pug';
 import AuthController from '../../api/controllers/auth';
 import UserController from '../../api/controllers/user';
-import { withStore } from '../../utils/store';
+import store, { StoreEvents, withStore } from '../../utils/store';
 import { CustomText } from '../../components/text';
 import { Modal } from '../../components/modal';
 import { InputFile } from '../../components/input-file';
@@ -23,6 +23,31 @@ class ProfilePage extends Block {
       },
       props
     );
+
+    store.on(StoreEvents.Updated, () => {
+      console.log('store', store.getState(), this.children.infoList);
+      this.init();
+      const user = store.getState().currentUser;
+      infoList.map((el, index) => {
+        if (
+          Array.isArray(this.children.infoList) &&
+          !Array.isArray(this.children.infoList[index])
+        )
+          this.children.infoList[index].setProps({
+            text: (user as Record<string, string | number>)[el.name],
+          });
+      });
+      if (!Array.isArray(this.children.userName))
+        this.children.userName.setProps({
+          text: store.getState().currentUser!.display_name,
+        });
+      if (!Array.isArray(this.children.profileImgButton))
+        this.children.profileImgButton.setProps({
+          imgSrc:
+            'https://ya-praktikum.tech/api/v2/resources' +
+            store.getState().currentUser!.avatar,
+        });
+    });
   }
 
   init(): void {

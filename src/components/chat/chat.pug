@@ -3,14 +3,14 @@
     p=name
     !=settingsButton
 .messages
-  each message in messages
-    if message
-      p=message.content
-  //- if (messages && id in messages)
-  //-   each message in messages[id]
-  //-     if message.user_id === userId
-  //-       p
-  //-         !=message.content
+  if messages
+    each message in messages
+      if message.user_id === userId
+        p.main
+          !=message.content
+      else 
+        p
+          !=message.content
 form.sendMessage
   !=messageInput
   !=send

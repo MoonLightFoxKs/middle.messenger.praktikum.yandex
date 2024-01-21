@@ -1,5 +1,5 @@
 import { errorHandling } from '../../utils/helpers';
-import { store } from '../../utils/store';
+import store from '../../utils/store';
 import ChatsApi from '../chat';
 
 class ChatsController {

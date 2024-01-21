@@ -1,4 +1,4 @@
-import { store } from '../../utils/store';
+import store from '../../utils/store';
 import WSTransport, { WSTransportEvents } from '../../utils/ws-transport';
 
 export type Message = {

@@ -6,17 +6,12 @@ import { Input } from '../input';
 import { Modal } from '../modal';
 import template from './chat.pug';
 import ChatsController from '../../api/controllers/chat';
-import { User, store, withStore } from '../../utils/store';
+import store, { User, withStore } from '../../utils/store';
 import { Form } from '../form';
 import UserController from '../../api/controllers/user';
 import { validateInput } from '../../utils/validate-input';
 import MessageController from '../../api/controllers/message';
 
-// type ChatProps = {
-//   name: string;
-//   id: number;
-//   messages?: string[];
-// };
 export class Chat extends Block {
   constructor(props: any) {
     super(
@@ -50,14 +45,7 @@ export class Chat extends Block {
   };
 
   init() {
-    // setTimeout(() => {
-    //   const messages = this.getContent()?.getElementsByClassName('messages');
-
-    //   if (messages![0]) {
-    //     messages![0].scrollTo(0, messages![0].scrollHeight);
-    //   }
-    // });
-
+    console.log(this.props, ' chat');
     this.children.settingsButton = new ImgButton({
       imgSrc: '/img/chat-settings.svg',
       alt: 'chat settings',
@@ -93,7 +81,7 @@ export class Chat extends Block {
           name: 'Удалить пользователя из чатика',
           className: 'settingsButtonInModal',
           onClick: async () => {
-            ChatsController.getUsers({ id: this.props.chat.id }).then(
+            ChatsController.getUsers({ id: this.props.id }).then(
               (user: Omit<User, 'phone' | 'email'>[]) => {
                 this.children.delUser = new Modal({
                   name: 'Удалить из чата',
@@ -110,7 +98,7 @@ export class Chat extends Block {
                       onClick: () => {
                         ChatsController.delUser({
                           users: [el.id],
-                          chatId: this.props.chat.id,
+                          chatId: this.props.id,
                         });
                         this.setProps({
                           isDelUser: false,
@@ -170,7 +158,7 @@ export class Chat extends Block {
                         onClick: () => {
                           ChatsController.addUser({
                             users: [el.id],
-                            chatId: this.props.chat.id,
+                            chatId: this.props.id,
                           });
                           this.setProps({
                             isUsers: false,
@@ -206,46 +194,6 @@ export class Chat extends Block {
         console.log(this.props, 'пропсы по клику');
         event?.preventDefault();
         this.addMessage();
-
-        // if (
-        //   !Array.isArray(this.children.messageInput) &&
-        //   this.children.messageInput
-        // ) {
-        //   const el = this.children.messageInput.getContent();
-        //   const value = el!.querySelector('input')!.value;
-
-        //   const resultValidation = validateInput(el!);
-
-        //   if (resultValidation.verify) {
-        //     console.log(this.props, 'пропсы после валидации');
-        //     MessageController.sendMessage(this.props.chat.id, value);
-        //     console.log(this.props.chat.id, 'id чатика');
-
-        //     this.children.messageInput.setProps({
-        //       value: '',
-        //     });
-        //   }
-
-        // let messages = this.props.messages;
-        // if (Array.isArray(messages)) {
-        //   messages.push(value);
-        // } else {
-        //   messages = [value];
-        // }
-
-        // if (!Array.isArray(this.children.messages))
-        //   this.setProps({
-        //     messages: messages,
-        //   });
-
-        // this.children.messageInput.setProps({
-        //   value: '',
-        // });
-
-        // el?.querySelector('input')?.focus();
-
-        // console.log({ message: value });
-        // }
       },
     });
   }

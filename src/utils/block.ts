@@ -111,7 +111,9 @@ export class Block<Props extends Record<string, any> = any> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  protected init() {}
+  protected init() {
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+  }
 
   _componentDidMount() {
     this.componentDidMount();

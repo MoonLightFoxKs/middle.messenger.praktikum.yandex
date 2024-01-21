@@ -6,7 +6,7 @@ import { Modal } from '../../components/modal';
 import { ButtonTag, ButtonType, InputType } from '../../constants';
 import { Block } from '../../utils/block';
 import { Router } from '../../utils/router';
-import { ChatData, store, withStore } from '../../utils/store';
+import store, { ChatData, StoreEvents, withStore } from '../../utils/store';
 import template from './chat.pug';
 import ChatsController from '../../api/controllers/chat';
 import MessageController from '../../api/controllers/message';
@@ -25,6 +25,14 @@ class ChatPage extends Block {
         ...props,
       }
     );
+    store.on(StoreEvents.Updated, () => {
+      if (!Array.isArray(this.children.chat) && this.props.data)
+        this.children.chat.setProps({
+          id: this.props.data.id,
+          name: this.props.data.title,
+          messages: store.getState().messages![this.props.data.id],
+        });
+    });
   }
 
   init(): void {
@@ -103,31 +111,15 @@ class ChatPage extends Block {
               const token = await ChatsController.getToken(data.id);
               await MessageController.connect(data.id, token);
 
-              this.children.chat = new Chat({
-                id: data.id,
-                name: data.title,
-                message: data.last_message?.content,
-                messages: store.getState().messages![data.id],
-              });
+              this.setProps({ data: data });
 
-              // if (!Array.isArray(this.children.chat))
-              //   this.children.chat.setProps({
-              //     chat: data,
-              //     name: data.title,
-              //   });
-              // (this.children.chat as any).init();
-
-              // this.children.chat.setProps({
-              //   chat: data,
-              // });
-
-              //ПОМИДОРЫ ПОМОГИТЕ
-              // if (!Array.isArray(this.children.chat))
-              //   this.children.chat.setProps({
-              //     name: el.element?.querySelector('.name')?.innerHTML!,
-              //     id: data.id,
-              //     // messages: this.props.messages,
-              //   });
+              if (!Array.isArray(this.children.chat) && this.props.messages)
+                this.children.chat.setProps({
+                  name: data.title,
+                  id: data.id,
+                  messages: this.props.messages[data.id],
+                  userId: store.getState().currentUser?.id,
+                });
 
               if (Array.isArray(this.children.chatPreviewList)) {
                 this.children.chatPreviewList.forEach((elem) => {
@@ -154,7 +146,5 @@ const Page = withStore((store) => ({
   chats: store.chats,
   messages: store.messages,
 }));
-
-console.log(Page);
 
 export default Page(ChatPage);

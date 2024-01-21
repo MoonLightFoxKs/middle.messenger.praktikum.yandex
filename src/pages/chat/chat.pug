@@ -9,8 +9,9 @@ style.
       !=profileButton
   .search
     !=search
-  each chatPreview in chatPreviewList
-    !=chatPreview
+  if chatPreviewList
+    each chatPreview in chatPreviewList
+      !=chatPreview
 .chatBody
   if isNoChat
     p Выберите чат чтобы отправить сообщение

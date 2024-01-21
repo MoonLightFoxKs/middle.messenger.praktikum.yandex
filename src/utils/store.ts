@@ -52,7 +52,7 @@ class Store extends EventBus {
   }
 }
 
-export const store = new Store();
+const store = new Store();
 
 export const withStore =
   (mapStateToProps: (state: StoreData) => Record<string, unknown>) =>
@@ -72,13 +72,8 @@ export const withStore =
             this.setProps({
               ...newState,
             });
-            console.log('перезапись стора');
 
             this.init();
-            // костыль, подумать
-            this.setProps({
-              ...newState,
-            });
 
             state = newState;
           }
@@ -86,3 +81,5 @@ export const withStore =
       }
     };
   };
+
+export default store;

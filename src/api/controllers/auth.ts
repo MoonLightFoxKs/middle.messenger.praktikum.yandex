@@ -1,6 +1,6 @@
 import { errorHandling } from '../../utils/helpers';
 import { Router } from '../../utils/router';
-import { store } from '../../utils/store';
+import store from '../../utils/store';
 import { AuthAPI, SigninData, SignupData } from '../auth';
 
 class AuthController {
