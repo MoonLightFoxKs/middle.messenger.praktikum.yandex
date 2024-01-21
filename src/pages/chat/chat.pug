@@ -3,14 +3,20 @@ style.
     background-color: #5236c4;
   }
 .chatList
-  .profileButton
-    !=profileButton
+  .topButtons
+    !=addChatButton
+    .profileButton
+      !=profileButton
   .search
     !=search
-  each chatPreview in chatPreviewList
-    !=chatPreview
+  if chatPreviewList
+    each chatPreview in chatPreviewList
+      !=chatPreview
 .chatBody
   if isNoChat
     p Выберите чат чтобы отправить сообщение
   else
     !=chat
+
+if addChat
+  !=addChatModal
