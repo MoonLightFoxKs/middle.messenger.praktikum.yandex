@@ -17,8 +17,9 @@ class AuthController {
       errorHandling(await this.api.signin(data));
 
       router.go('/messenger');
-    } catch (e) {
-      if (e === 'User already in system') router.go('/messenger');
+    } catch (e: unknown) {
+      if ((e as Error).message === 'User already in system')
+        router.go('/messenger');
       else alert(e);
     }
   }
