@@ -33,6 +33,15 @@ class ChatPage extends Block {
           messages: store.getState().messages![this.props.data.id],
           userId: store.getState().currentUser?.id,
         });
+
+      setTimeout(() => {
+        const messages = this.getContent()?.getElementsByClassName('messages');
+
+        if (messages![0]) {
+          console.log(messages![0]);
+          messages![0].scrollTo(0, messages![0].scrollHeight);
+        }
+      });
     });
   }
 
