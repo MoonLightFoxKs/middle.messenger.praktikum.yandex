@@ -34,7 +34,6 @@ export class Chat extends Block {
       const resultValidation = validateInput(el!);
 
       if (resultValidation.verify) {
-        console.log(this.props, 'пропсы чата');
         MessageController.sendMessage(this.props.id, value);
 
         this.children.messageInput.setProps({
@@ -45,7 +44,6 @@ export class Chat extends Block {
   };
 
   init() {
-    console.log(this.props, ' chat');
     this.children.settingsButton = new ImgButton({
       imgSrc: '/img/chat-settings.svg',
       alt: 'chat settings',
@@ -134,6 +132,9 @@ export class Chat extends Block {
               type: InputType.text,
               name: 'login',
               placeholder: 'Поиск пользователя',
+              onEnter: (event: KeyboardEvent) => {
+                event.preventDefault();
+              },
             }),
           ],
           buttonProps: {
@@ -191,7 +192,6 @@ export class Chat extends Block {
       type: ButtonType.submit,
       name: '➜',
       onClick: (event: MouseEvent | undefined) => {
-        console.log(this.props, 'пропсы по клику');
         event?.preventDefault();
         this.addMessage();
       },
