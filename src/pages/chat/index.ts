@@ -1,18 +1,20 @@
 import { Button } from '../../components/button';
-import { Chat } from '../../components/chat';
+import { Form } from '../../components/form';
+import { ImgButton } from '../../components/img-button';
 import { Input } from '../../components/input';
+import { Modal } from '../../components/modal';
 import { ButtonTag, ButtonType, InputType } from '../../constants';
 import { Block } from '../../utils/block';
-import { render } from '../../utils/render';
+import { Router } from '../../utils/router';
+import store, { ChatData, StoreEvents, withStore } from '../../utils/store';
 import template from './chat.pug';
-import { chatPreviewList } from './constants';
+import ChatsController from '../../api/controllers/chat';
+import MessageController from '../../api/controllers/message';
+import { ChatPreview } from '../../components/chat-preview';
+import { Chat } from '../../components/chat';
 
-type ChatPageProps = {
-  isNoChat?: boolean;
-};
-
-export class ChatPage extends Block {
-  constructor(props?: ChatPageProps) {
+class ChatPage extends Block {
+  constructor(props?: any) {
     super(
       {
         tagName: 'div',
@@ -23,14 +25,78 @@ export class ChatPage extends Block {
         ...props,
       },
     );
+    store.on(StoreEvents.Updated, () => {
+      if (!Array.isArray(this.children.chat) && this.props.data)
+        this.children.chat.setProps({
+          id: this.props.data.id,
+          name: this.props.data.title,
+          messages: store.getState().messages![this.props.data.id],
+          userId: store.getState().currentUser?.id,
+        });
+
+      setTimeout(() => {
+        const messages = this.getContent()?.getElementsByClassName('messages');
+
+        if (messages![0]) {
+          console.log(messages![0]);
+          messages![0].scrollTo(0, messages![0].scrollHeight);
+        }
+      });
+    });
   }
 
   init(): void {
+    this.children.addChatButton = new ImgButton({
+      imgSrc: '/img/add.svg',
+      alt: 'add chat',
+      className: 'addChatButton',
+      onClick: () => {
+        this.setProps({
+          addChat: true,
+        });
+      },
+    });
+
+    this.children.addChatModal = new Modal({
+      name: 'Создать чат',
+      close: () => {
+        this.setProps({
+          addChat: false,
+        });
+      },
+      content: [
+        new Form({
+          inputs: [
+            new Input({
+              name: 'title',
+              type: InputType.text,
+              placeholder: 'Название чата',
+            }),
+          ],
+          buttonProps: {
+            type: ButtonType.submit,
+            name: 'Сохранить',
+            className: 'addChatSubmit',
+            callback: (data: any) => {
+              ChatsController.addChat(data).then(() =>
+                this.setProps({
+                  addChat: false,
+                }),
+              );
+            },
+          },
+        }),
+      ],
+    });
+
     this.children.profileButton = new Button({
       type: ButtonType.button,
       tag: ButtonTag.link,
       name: 'Профиль',
-      onClick: () => render('profile'),
+      onClick: () => {
+        const router = new Router();
+        router.go('/settings');
+      },
     });
 
     this.children.search = new Input({
@@ -40,30 +106,55 @@ export class ChatPage extends Block {
       className: 'searchInput',
     });
 
-    this.children.chatPreviewList = chatPreviewList.map((el) => {
-      el.setProps({
-        events: {
-          click: () => {
-            this.children.chat = new Chat({
-              name: el.element?.querySelector('.name')?.innerHTML!,
-            });
-            if (Array.isArray(this.children.chatPreviewList)) {
-              this.children.chatPreviewList.forEach((elem) => {
-                elem.getContent()?.classList.remove('active');
+    this.children.chat = new Chat({});
+
+    if (this.props.chats)
+      this.children.chatPreviewList = this.props.chats.map((data: ChatData) => {
+        const el = new ChatPreview({
+          id: data.id,
+          name: data.title,
+          message: data.last_message?.content,
+        });
+        el.setProps({
+          events: {
+            click: async () => {
+              const token = await ChatsController.getToken(data.id);
+              await MessageController.connect(data.id, token);
+
+              this.setProps({ data: data });
+
+              if (!Array.isArray(this.children.chat) && this.props.messages)
+                this.children.chat.setProps({
+                  name: data.title,
+                  id: data.id,
+                  messages: this.props.messages[data.id],
+                  userId: store.getState().currentUser?.id,
+                });
+
+              if (Array.isArray(this.children.chatPreviewList)) {
+                this.children.chatPreviewList.forEach((elem) => {
+                  elem.getContent()?.classList.remove('active');
+                });
+              }
+              el.getContent()?.classList.add('active');
+              this.setProps({
+                isNoChat: false,
               });
-            }
-            el.getContent()?.classList.add('active');
-            this.setProps({
-              isNoChat: false,
-            });
+            },
           },
-        },
+        });
+        return el;
       });
-      return el;
-    });
   }
 
   render() {
     return this.compile(template, this.props);
   }
 }
+
+const Page = withStore((Store) => ({
+  chats: Store.chats,
+  messages: Store.messages,
+}));
+
+export default Page(ChatPage);

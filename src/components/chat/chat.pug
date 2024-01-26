@@ -1,10 +1,25 @@
 .head
     img(src="/img/photo.svg" alt='profile photo')
-    p #{name}
+    p=name
+    !=settingsButton
 .messages
-  each message in messages
-    if message
-      p #{message}
+  if messages
+    each message in messages
+      if message.user_id === userId
+        p.main
+          !=message.content
+      else 
+        p
+          !=message.content
 form.sendMessage
   !=messageInput
   !=send
+
+if openSettings
+  !=settingsModal
+if isDelUser
+  !=delUser
+if addUser
+ !=addUserModal
+if isUsers
+  !=users

@@ -1,0 +1,51 @@
+.modal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 50%);
+  z-index: 2000;
+
+  h2 {
+    margin-bottom: 10px;
+    color: white;
+  }
+
+  .modalContent {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    background-color: #5236c4;
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .inputContainer {
+      background-color: #5236c4;
+
+      input {
+        background-color: #5236c4;
+      }
+    }
+
+    .closeButton {
+      all: unset;
+      position: absolute;
+      right: 20px;
+      color: black;
+      cursor: pointer;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
