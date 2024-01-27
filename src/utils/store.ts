@@ -1,8 +1,8 @@
-import { Message } from '../api/controllers/message';
-import { UserData } from '../api/user';
-import Block from './block';
-import { EventBus } from './event-bus';
-import { set, isEqual } from './helpers';
+import { Message } from '../api/controllers/message.ts';
+import { UserData } from '../api/user.ts';
+import Block from './block.ts';
+import { EventBus } from './event-bus.ts';
+import { set, isEqual } from './helpers.ts';
 
 export enum StoreEvents {
   Updated = 'updated',

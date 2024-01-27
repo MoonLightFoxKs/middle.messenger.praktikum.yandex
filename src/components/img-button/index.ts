@@ -1,4 +1,4 @@
-import Block from '../../utils/block';
+import Block from '../../utils/block.ts';
 import template from './img-button.pug';
 
 type ImgButtonProps = {

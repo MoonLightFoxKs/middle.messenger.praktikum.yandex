@@ -1,11 +1,11 @@
-import { Button } from '../../../components/button';
-import { Form } from '../../../components/form';
-import { ButtonTag, ButtonType } from '../../../constants';
-import Block from '../../../utils/block';
-import { Router } from '../../../utils/router';
+import { Button } from '../../../components/button/index.ts';
+import { Form } from '../../../components/form/index.ts';
+import { ButtonTag, ButtonType } from '../../../constants.ts';
+import Block from '../../../utils/block.ts';
+import { Router } from '../../../utils/router.ts';
 import template from './sign-up.pug';
-import { signupInputs } from '../constants';
-import AuthController from '../../../api/controllers/auth';
+import { signupInputs } from '../constants.ts';
+import AuthController from '../../../api/controllers/auth.ts';
 
 export class SignUpPage extends Block {
   constructor() {

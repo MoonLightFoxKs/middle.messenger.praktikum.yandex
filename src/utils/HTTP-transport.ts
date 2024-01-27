@@ -1,4 +1,4 @@
-import { queryStringify } from './helpers';
+import { queryStringify } from './helpers.ts';
 
 enum METHODS {
   GET = 'GET',

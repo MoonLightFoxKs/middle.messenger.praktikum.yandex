@@ -1,7 +1,7 @@
-import { errorHandling } from '../../utils/helpers';
-import { Router } from '../../utils/router';
-import store from '../../utils/store';
-import { AuthAPI, SigninData, SignupData } from '../auth';
+import { errorHandling } from '../../utils/helpers.ts';
+import { Router } from '../../utils/router.ts';
+import store from '../../utils/store.ts';
+import { AuthAPI, SigninData, SignupData } from '../auth.ts';
 
 class AuthController {
   private readonly api: AuthAPI;

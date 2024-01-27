@@ -1,4 +1,4 @@
-import { InputType } from '../../constants';
+import { InputType } from '../../constants.ts';
 
 type InfoListProps = {
   label: string;

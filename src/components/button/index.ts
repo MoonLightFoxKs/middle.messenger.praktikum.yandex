@@ -1,5 +1,5 @@
-import { ButtonTag, ButtonType } from '../../constants';
-import Block from '../../utils/block';
+import { ButtonTag, ButtonType } from '../../constants.ts';
+import Block from '../../utils/block.ts';
 import template from './button.pug';
 
 type ButtonProps = {

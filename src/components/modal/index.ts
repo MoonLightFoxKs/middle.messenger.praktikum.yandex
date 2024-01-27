@@ -1,5 +1,5 @@
-import Block from '../../utils/block';
-import { ImgButton } from '../img-button';
+import Block from '../../utils/block.ts';
+import { ImgButton } from '../img-button/index.ts';
 import template from './modal.pug';
 
 type ModalProps = {

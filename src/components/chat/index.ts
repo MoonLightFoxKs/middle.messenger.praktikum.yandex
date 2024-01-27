@@ -1,16 +1,16 @@
-import { ButtonTag, ButtonType, InputType } from '../../constants';
-import Block from '../../utils/block';
-import { Button } from '../button';
-import { ImgButton } from '../img-button';
-import { Input } from '../input';
-import { Modal } from '../modal';
+import { ButtonTag, ButtonType, InputType } from '../../constants.ts';
+import Block from '../../utils/block.ts';
+import { Button } from '../button/index.ts';
+import { ImgButton } from '../img-button/index.ts';
+import { Input } from '../input/index.ts';
+import { Modal } from '../modal/index.ts';
 import template from './chat.pug';
-import ChatsController from '../../api/controllers/chat';
-import { User, withStore } from '../../utils/store';
-import { Form } from '../form';
-import UserController from '../../api/controllers/user';
-import { validateInput } from '../../utils/validate-input';
-import MessageController from '../../api/controllers/message';
+import ChatsController from '../../api/controllers/chat.ts';
+import { User, withStore } from '../../utils/store.ts';
+import { Form } from '../form/index.ts';
+import UserController from '../../api/controllers/user.ts';
+import { validateInput } from '../../utils/validate-input.ts';
+import MessageController from '../../api/controllers/message.ts';
 
 export class Chat extends Block {
   constructor(props: any) {

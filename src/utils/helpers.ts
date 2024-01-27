@@ -1,4 +1,4 @@
-import { Router } from './router';
+import { Router } from './router.ts';
 
 export type Indexed<T = any> = {
   [key in string]: T;

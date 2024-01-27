@@ -1,6 +1,6 @@
-import { errorHandling } from '../../utils/helpers';
-import store from '../../utils/store';
-import UserApi, { UserData, UserPassword } from '../user';
+import { errorHandling } from '../../utils/helpers.ts';
+import store from '../../utils/store.ts';
+import UserApi, { UserData, UserPassword } from '../user.ts';
 
 class UserController {
   private readonly api: UserApi;

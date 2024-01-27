@@ -1,6 +1,6 @@
-import { InputType } from '../../constants';
-import Block from '../../utils/block';
-import { validateInput } from '../../utils/validate-input';
+import { InputType } from '../../constants.ts';
+import Block from '../../utils/block.ts';
+import { validateInput } from '../../utils/validate-input.ts';
 import template from './input.pug';
 
 type InputProps = {

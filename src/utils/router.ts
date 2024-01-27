@@ -1,7 +1,7 @@
-import Block from './block';
-import { Route } from './route';
-import AuthController from '../api/controllers/auth';
-import ChatsController from '../api/controllers/chat';
+import Block from './block.ts';
+import { Route } from './route.ts';
+import AuthController from '../api/controllers/auth.ts';
+import ChatsController from '../api/controllers/chat.ts';
 
 export class Router {
   private static __instance: Router;

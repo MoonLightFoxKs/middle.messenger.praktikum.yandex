@@ -1,8 +1,8 @@
-import { ButtonType } from '../../constants';
-import Block from '../../utils/block';
-import { validateInput } from '../../utils/validate-input';
-import { Button } from '../button';
-import { Input } from '../input';
+import { ButtonType } from '../../constants.ts';
+import Block from '../../utils/block.ts';
+import { validateInput } from '../../utils/validate-input.ts';
+import { Button } from '../button/index.ts';
+import { Input } from '../input/index.ts';
 
 import template from './form.pug';
 

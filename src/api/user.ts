@@ -1,4 +1,4 @@
-import { BaseAPI } from './base';
+import { BaseAPI } from './base.ts';
 
 export type UserData = {
   first_name: string;

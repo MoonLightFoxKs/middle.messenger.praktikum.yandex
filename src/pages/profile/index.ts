@@ -1,19 +1,19 @@
-import { Button } from '../../components/button';
-import { Form } from '../../components/form';
-import { ImgButton } from '../../components/img-button';
-import { InfoBlock } from '../../components/info-block';
-import { Input } from '../../components/input';
-import { ButtonTag, ButtonType } from '../../constants';
-import Block from '../../utils/block';
-import { infoList, passwordList } from './constants';
+import { Button } from '../../components/button/index.ts';
+import { Form } from '../../components/form/index.ts';
+import { ImgButton } from '../../components/img-button/index.ts';
+import { InfoBlock } from '../../components/info-block/index.ts';
+import { Input } from '../../components/input/index.ts';
+import { ButtonTag, ButtonType } from '../../constants.ts';
+import Block from '../../utils/block.ts';
+import { infoList, passwordList } from './constants.ts';
 import template from './profile.pug';
-import AuthController from '../../api/controllers/auth';
-import UserController from '../../api/controllers/user';
-import store, { StoreEvents, withStore } from '../../utils/store';
-import { CustomText } from '../../components/text';
-import { Modal } from '../../components/modal';
-import { InputFile } from '../../components/input-file';
-import { Router } from '../../utils/router';
+import AuthController from '../../api/controllers/auth.ts';
+import UserController from '../../api/controllers/user.ts';
+import store, { StoreEvents, withStore } from '../../utils/store.ts';
+import { CustomText } from '../../components/text/index.ts';
+import { Modal } from '../../components/modal/index.ts';
+import { InputFile } from '../../components/input-file/index.ts';
+import { Router } from '../../utils/router.ts';
 
 class ProfilePage extends Block {
   constructor(props: any) {
