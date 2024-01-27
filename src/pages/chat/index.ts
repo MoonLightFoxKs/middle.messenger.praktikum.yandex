@@ -4,7 +4,7 @@ import { ImgButton } from '../../components/img-button';
 import { Input } from '../../components/input';
 import { Modal } from '../../components/modal';
 import { ButtonTag, ButtonType, InputType } from '../../constants';
-import { Block } from '../../utils/block';
+import  Block  from '../../utils/block';
 import { Router } from '../../utils/router';
 import store, { ChatData, StoreEvents, withStore } from '../../utils/store';
 import template from './chat.pug';

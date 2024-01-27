@@ -1,5 +1,5 @@
 import { InputType } from '../../constants';
-import { Block } from '../../utils/block';
+import Block from '../../utils/block';
 import { validateInput } from '../../utils/validate-input';
 import template from './input.pug';
 

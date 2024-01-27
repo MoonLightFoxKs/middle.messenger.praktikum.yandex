@@ -1,4 +1,4 @@
-import { Block } from '../../utils/block';
+import Block from '../../utils/block';
 import { ImgButton } from '../img-button';
 import template from './modal.pug';
 

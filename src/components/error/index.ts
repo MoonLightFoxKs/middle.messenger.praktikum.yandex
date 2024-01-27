@@ -1,4 +1,4 @@
-import { Block } from '../../utils/block';
+import Block from '../../utils/block';
 import template from './error.pug';
 
 type ErrorPageProps = {

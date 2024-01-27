@@ -2,13 +2,13 @@ import { EventBus } from './event-bus';
 import { nanoid } from 'nanoid';
 
 type Container = {
-  tagName: string;
+  tagName?: string;
   className?: string;
   display?: string;
 };
 
 //ругается на unknown
-export class Block<Props extends Record<string, any> = any> {
+class Block<Props extends Record<string, any> = any> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -239,7 +239,7 @@ export class Block<Props extends Record<string, any> = any> {
   }
 
   _createDocumentElement(container: Container) {
-    const elem = document.createElement(container.tagName);
+    const elem = document.createElement(container.tagName!);
     container.className && elem.classList.add(container.className);
     elem.style.display = container.display!;
     return elem;
@@ -255,3 +255,5 @@ export class Block<Props extends Record<string, any> = any> {
     content!.style.display = 'none';
   }
 }
+
+export default Block;

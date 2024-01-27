@@ -1,5 +1,5 @@
 import { ButtonType } from '../../constants';
-import { Block } from '../../utils/block';
+import Block from '../../utils/block';
 import { validateInput } from '../../utils/validate-input';
 import { Button } from '../button';
 import { Input } from '../input';

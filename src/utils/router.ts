@@ -1,4 +1,4 @@
-import { Block } from './block';
+import Block from './block';
 import { Route } from './route';
 import AuthController from '../api/controllers/auth';
 import ChatsController from '../api/controllers/chat';

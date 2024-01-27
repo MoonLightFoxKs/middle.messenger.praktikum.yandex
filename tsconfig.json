@@ -1,10 +1,14 @@
 {
+  // "ts-node": {
+  //   "files": true,
+  // },
   "include": [
     "src",
     "vite-plugin-pug-precompile.ts",
     "vite.config.ts",
     "server.js",
-    "index.ts"
+    "index.ts",
+    "mochaSetup.js"
   ],
   "exclude": ["./dist"],
   "compilerOptions": {
@@ -25,6 +29,6 @@
     "isolatedModules": true,
     "noEmit": true,
     "typeRoots": ["./src/@types", "./node_modules/@types"],
-    "types": ["node"]
+    "types": ["node","mocha"]
   }
 }

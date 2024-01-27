@@ -1,7 +1,7 @@
 import { Button } from '../../../components/button';
 import { Form } from '../../../components/form';
 import { ButtonTag, ButtonType } from '../../../constants';
-import { Block } from '../../../utils/block';
+import Block from '../../../utils/block';
 import { Router } from '../../../utils/router';
 import template from './sign-up.pug';
 import { signupInputs } from '../constants';

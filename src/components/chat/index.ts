@@ -1,5 +1,5 @@
 import { ButtonTag, ButtonType, InputType } from '../../constants';
-import { Block } from '../../utils/block';
+import Block from '../../utils/block';
 import { Button } from '../button';
 import { ImgButton } from '../img-button';
 import { Input } from '../input';

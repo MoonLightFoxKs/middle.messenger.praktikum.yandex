@@ -1,6 +1,6 @@
 import { Message } from '../api/controllers/message';
 import { UserData } from '../api/user';
-import { Block } from './block';
+import Block from './block';
 import { EventBus } from './event-bus';
 import { set, isEqual } from './helpers';
 

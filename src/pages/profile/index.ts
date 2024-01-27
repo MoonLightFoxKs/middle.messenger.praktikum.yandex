@@ -4,7 +4,7 @@ import { ImgButton } from '../../components/img-button';
 import { InfoBlock } from '../../components/info-block';
 import { Input } from '../../components/input';
 import { ButtonTag, ButtonType } from '../../constants';
-import { Block } from '../../utils/block';
+import Block from '../../utils/block';
 import { infoList, passwordList } from './constants';
 import template from './profile.pug';
 import AuthController from '../../api/controllers/auth';

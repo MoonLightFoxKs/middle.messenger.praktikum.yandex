@@ -17,11 +17,7 @@
     "react/jsx-filename-extension": [0],
     "import/extensions": [
       "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "ts": "never"
-      }
+      "ignorePackages"
     ]
   },
   "settings": {
