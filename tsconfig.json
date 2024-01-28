@@ -1,7 +1,4 @@
 {
-  // "ts-node": {
-  //   "files": true,
-  // },
   "include": [
     "src",
     "vite-plugin-pug-precompile.ts",
@@ -30,6 +27,5 @@
     "esModuleInterop": true,
     "noEmit": true,
     "typeRoots": ["./src/@types", "./node_modules/@types"],
-    // "types": ["node","mocha"]
   }
 }
