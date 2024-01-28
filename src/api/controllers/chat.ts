@@ -1,6 +1,6 @@
-import { errorHandling } from '../../utils/helpers';
-import store from '../../utils/store';
-import ChatsApi from '../chat';
+import { errorHandling } from '../../utils/helpers.ts';
+import store from '../../utils/store.ts';
+import ChatsApi from '../chat.ts';
 
 class ChatsController {
   private api: ChatsApi;

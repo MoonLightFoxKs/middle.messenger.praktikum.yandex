@@ -1,4 +1,4 @@
-import { BaseAPI } from './base';
+import { BaseAPI } from './base.ts';
 
 export default class ChatsApi extends BaseAPI {
   constructor() {

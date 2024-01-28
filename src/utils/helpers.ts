@@ -1,4 +1,4 @@
-import { Router } from './router';
+import { Router } from './router.ts';
 
 export type Indexed<T = any> = {
   [key in string]: T;
@@ -83,13 +83,6 @@ export function isEqual(lhs: Indexed, rhs: Indexed) {
   }
 
   return true;
-}
-
-export function queryStringify(data: Record<string, any>) {
-  return Object.entries(data).reduce(
-    (acc, e, i) => `${acc}${i > 0 ? '&' : '?'}${e[0]}=${e[1]}`,
-    '',
-  );
 }
 
 export const errorHandling = (response: XMLHttpRequest) => {
