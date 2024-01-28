@@ -64,5 +64,8 @@
     "sinon": "^17.0.1",
     "stylelint-config-standard-less": "^3.0.0",
     "ts-node": "^10.9.2"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.6.1"
   }
 }
