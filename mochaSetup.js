@@ -1,7 +1,7 @@
 import { JSDOM } from 'jsdom';
 import Sinon from 'sinon';
 
-const { window } = new JSDOM('<div id="app"></div>', {
+const { window } = new JSDOM('<main id="app"></main>', {
   url: 'http://localhost:3000',
 });
 

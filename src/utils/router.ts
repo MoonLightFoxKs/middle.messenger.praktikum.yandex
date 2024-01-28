@@ -4,7 +4,7 @@ import AuthController from '../api/controllers/auth.ts';
 import ChatsController from '../api/controllers/chat.ts';
 
 export class Router {
-  private static __instance: Router;
+  private static __instance?: Router;
 
   private _currentRoute: Route | null;
 
@@ -96,5 +96,11 @@ export class Router {
 
   getRoute(pathname: string) {
     return this._routes.find((route) => route.match(pathname));
+  }
+
+  reset() {
+    delete Router.__instance;
+
+    new Router(this._rootQuery);
   }
 }

@@ -1,3 +1,5 @@
+import pug from 'pug';
+
 const pugLoader = {
   resolve: (specifier, options) => {
     const { href, pathname } = new URL(specifier, options.parentURL);
@@ -29,7 +31,7 @@ const pugLoader = {
     }
 
     const result = `
-          ${pug.compileClient(code, { basedir: __dirname })};
+          ${pug.compileClient(String(source))};
           
           export default template;
           `;

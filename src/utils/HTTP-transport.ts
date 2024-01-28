@@ -1,4 +1,9 @@
-import { queryStringify } from './helpers.ts';
+function queryStringify(data: Record<string, any>) {
+  return Object.entries(data).reduce(
+    (acc, e, i) => `${acc}${i > 0 ? '&' : '?'}${e[0]}=${e[1]}`,
+    '',
+  );
+}
 
 enum METHODS {
   GET = 'GET',
@@ -24,7 +29,7 @@ type HTTPRequest = (
   isFile?: boolean
 ) => Promise<XMLHttpRequest>;
 
-export class HTTPTransport {
+export default class HTTPTransport {
   private API_URL = 'https://ya-praktikum.tech/api/v2';
 
   endpoint: string;

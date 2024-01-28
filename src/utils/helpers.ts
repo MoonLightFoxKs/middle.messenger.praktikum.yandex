@@ -85,13 +85,6 @@ export function isEqual(lhs: Indexed, rhs: Indexed) {
   return true;
 }
 
-export function queryStringify(data: Record<string, any>) {
-  return Object.entries(data).reduce(
-    (acc, e, i) => `${acc}${i > 0 ? '&' : '?'}${e[0]}=${e[1]}`,
-    '',
-  );
-}
-
 export const errorHandling = (response: XMLHttpRequest) => {
   const router = new Router();
   if (response.status === 500) {
