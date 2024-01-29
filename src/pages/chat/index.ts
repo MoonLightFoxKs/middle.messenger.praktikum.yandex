@@ -1,17 +1,17 @@
-import { Button } from '../../components/button';
-import { Form } from '../../components/form';
-import { ImgButton } from '../../components/img-button';
-import { Input } from '../../components/input';
-import { Modal } from '../../components/modal';
-import { ButtonTag, ButtonType, InputType } from '../../constants';
-import { Block } from '../../utils/block';
-import { Router } from '../../utils/router';
-import store, { ChatData, StoreEvents, withStore } from '../../utils/store';
+import { Button } from '../../components/button/index.ts';
+import { Form } from '../../components/form/index.ts';
+import { ImgButton } from '../../components/img-button/index.ts';
+import { Input } from '../../components/input/index.ts';
+import { Modal } from '../../components/modal/index.ts';
+import { ButtonTag, ButtonType, InputType } from '../../constants.ts';
+import Block from '../../utils/block.ts';
+import { Router } from '../../utils/router.ts';
+import store, { ChatData, StoreEvents, withStore } from '../../utils/store.ts';
 import template from './chat.pug';
-import ChatsController from '../../api/controllers/chat';
-import MessageController from '../../api/controllers/message';
-import { ChatPreview } from '../../components/chat-preview';
-import { Chat } from '../../components/chat';
+import ChatsController from '../../api/controllers/chat.ts';
+import MessageController from '../../api/controllers/message.ts';
+import { ChatPreview } from '../../components/chat-preview/index.ts';
+import { Chat } from '../../components/chat/index.ts';
 
 class ChatPage extends Block {
   constructor(props?: any) {

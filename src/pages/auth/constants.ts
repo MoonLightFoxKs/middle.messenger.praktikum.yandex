@@ -1,5 +1,5 @@
-import { Input } from '../../components/input';
-import { InputType } from '../../constants';
+import { Input } from '../../components/input/index.ts';
+import { InputType } from '../../constants.ts';
 
 export const signupInputs = [
   new Input({

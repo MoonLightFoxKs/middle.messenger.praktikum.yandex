@@ -1,5 +1,5 @@
-import { ErrorPage } from '../../components/error';
-import { Block } from '../../utils/block';
+import { ErrorPage } from '../../components/error/index.ts';
+import Block from '../../utils/block.ts';
 import template from './404.pug';
 
 export class Error404 extends Block {
